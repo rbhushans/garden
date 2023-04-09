@@ -15,15 +15,15 @@
     "commands": [
       {
         "command": "garden.water",
-        "title": "Water"
+        "title": "Garden: Water"
       },
       {
         "command": "garden.refresh",
-        "title": "Refresh"
+        "title": "Garden: Refresh"
       },
       {
         "command": "garden.edit",
-        "title": "Edit"
+        "title": "Garden: Edit"
       }
     ],
     "configuration": {
@@ -34,8 +34,10 @@
           "items": {
             "type": "string",
             "enum": [
-              "plant1",
-              "plant2"
+              "monstera",
+              "pothos",
+              "ivy",
+              "fern"
             ]
           },
           "default": [
@@ -53,6 +55,11 @@
           "type": "integer",
           "default": 30,
           "description": "Time between water notifications (This is ignored if notifications are disabled)"
+        },
+        "garden.waterAmount": {
+          "type": "integer",
+          "default": 100,
+          "description": "Amount to water plants"
         }
       }
     }
