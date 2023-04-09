@@ -1,0 +1,81 @@
+{
+  "name": "garden",
+  "displayName": "Garden",
+  "description": "This extension provides the user with a personalized garden.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "garden.water",
+        "title": "Water"
+      },
+      {
+        "command": "garden.refresh",
+        "title": "Refresh"
+      },
+      {
+        "command": "garden.edit",
+        "title": "Edit"
+      }
+    ],
+    "configuration": {
+      "title": "Garden",
+      "properties": {
+        "garden.plants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "plant1",
+              "plant2"
+            ]
+          },
+          "default": [
+            "a"
+          ],
+          "scope": "window",
+          "description": "The plants for the garden"
+        },
+        "garden.shouldNotify": {
+          "type": "boolean",
+          "default": true,
+          "description": "Should the extension notify you when the plants need water?"
+        },
+        "garden.waterNotificationTime": {
+          "type": "integer",
+          "default": 30,
+          "description": "Time between water notifications (This is ignored if notifications are disabled)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.77.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5",
+    "@vscode/test-electron": "^2.3.0"
+  }
+}
