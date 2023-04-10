@@ -12,6 +12,16 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "garden.gardenView",
+          "name": "Garden",
+          "icon": "src/assets/icons/gardenIcon.svg"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "garden.water",

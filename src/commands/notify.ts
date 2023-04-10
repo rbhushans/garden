@@ -22,6 +22,8 @@ const sendWaterNotification = async (context: vscode.ExtensionContext) => {
             }
           }
         );
+      } else {
+        return;
       }
     }, waterNotificationTime * 60 * 60 * 1000);
   }
