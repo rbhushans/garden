@@ -1,8 +1,10 @@
+import { Plant } from "../types/Plant";
+
 export const plantTypes = ["monstera", "pothos", "ivy", "fern"];
 
-export const plantImages = {
-  monstera: "../assets/plants",
-  pothos: "../assets/plants",
-  ivy: "../assets/plants",
-  fern: "../assets/plants"
+export const plants = {
+  monstera: { source: "../assets/plants", location: "ground" },
+  pothos: { source: "../assets/plants", location: "hanging" },
+  ivy: { source: "../assets/plants", location: "ground" },
+  fern: { source: "../assets/plants", location: "ground" }
 };

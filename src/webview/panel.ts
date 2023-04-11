@@ -31,6 +31,12 @@ const getWebView = (
         <div class="main-div">
             hello!!!
         </div>
+        <div id="water-level">
+
+        </div>
+        <ul id="plant-list">
+          <li> test item </li>
+				</ul>
         <script nonce="${nonce}" src="${scriptUri}"></script>
     </body>
     </html>`;

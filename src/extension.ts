@@ -4,9 +4,12 @@ import { StateManager } from "./managers/StateManager";
 import { SettingsManager } from "./managers/SettingsManager";
 import { GardenViewProvider } from "./webview/GardenViewProvider";
 import { Notify } from "./commands/Notify";
+import { Water } from "./commands/Water";
+import { Refresh } from "./commands/Refresh";
 
 export function activate(context: vscode.ExtensionContext) {
-  const provider = new GardenViewProvider(context.extensionUri);
+  // register provider for webview
+  const provider = new GardenViewProvider(context.extensionUri, context);
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
@@ -15,14 +18,22 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
+  //todo: need to get this working asynchronously and not blocking everything, maybe need to run at end of activate not sure
+  // if (SettingsManager.getShouldNotify()) {
+  //   Notify.sendWaterNotification(context);
+  // }
+
   // command for watering plants
   let waterCommand = vscode.commands.registerCommand("garden.water", () => {
+    Water.waterPlants(context);
+    provider.waterPlants();
     vscode.window.showInformationMessage("The garden has been watered!");
   });
 
   // command for refreshing plants
   let refreshCommand = vscode.commands.registerCommand("garden.refresh", () => {
-    SettingsManager.getPlants();
+    Refresh.setRandomPlants(context);
+    provider.updatePlants();
     vscode.window.showInformationMessage("The garden has been refreshed!");
   });
 
@@ -45,12 +56,14 @@ export function activate(context: vscode.ExtensionContext) {
     if (plantsAffected) {
       const currentPlants: string[] = SettingsManager.getPlants();
       StateManager.updatePlants(context, currentPlants);
-      // todo: update the UI of the garden for new/removed plants
+      provider.updatePlants(currentPlants);
     }
 
     if (shouldNotifyAffected) {
       const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
-      Notify.sendWaterNotification(context);
+      if (currentShouldNotify) {
+        Notify.sendWaterNotification(context);
+      }
     }
   });
 }

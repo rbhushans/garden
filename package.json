@@ -9,7 +9,12 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onWebviewPanel:garden",
+    "onView:explorer",
+    "onView:gardenView",
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "views": {
@@ -25,17 +30,39 @@
     "commands": [
       {
         "command": "garden.water",
-        "title": "Garden: Water"
+        "title": "Garden: Water",
+        "icon": {
+          "light": "src/assets/icons/light/watering-can-light.svg",
+          "dark": "src/assets/icons/dark/watering-can-dark.svg"
+        }
       },
       {
         "command": "garden.refresh",
-        "title": "Garden: Refresh"
+        "title": "Garden: Refresh",
+        "icon": {
+          "light": "src/assets/icons/light/refresh.svg",
+          "dark": "src/assets/icons/dark/refresh.svg"
+        }
       },
       {
         "command": "garden.edit",
         "title": "Garden: Edit"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "garden.water",
+          "group": "navigation",
+          "when": "view == garden.gardenView"
+        },
+        {
+          "command": "garden.refresh",
+          "group": "navigation",
+          "when": "view == garden.gardenView"
+        }
+      ]
+    },
     "configuration": {
       "title": "Garden",
       "properties": {
@@ -51,7 +78,10 @@
             ]
           },
           "default": [
-            "a"
+            "monstera",
+            "pothos",
+            "ivy",
+            "fern"
           ],
           "scope": "window",
           "description": "The plants for the garden"
@@ -70,6 +100,14 @@
           "type": "integer",
           "default": 100,
           "description": "Amount to water plants"
+        },
+        "garden.background": {
+          "type": "string",
+          "enum": [
+            "outside"
+          ],
+          "default": "outside",
+          "description": "Background for Garden"
         }
       }
     }

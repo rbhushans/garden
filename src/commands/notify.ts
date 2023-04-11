@@ -15,8 +15,6 @@ const sendWaterNotification = async (context: vscode.ExtensionContext) => {
       if (shouldNotify) {
         sendNotification("Reminder to water your plants!", ["Water"]).then(
           (value: string | undefined) => {
-            console.log(value);
-
             if (value === "Water") {
               Water.waterPlants(context);
             }
