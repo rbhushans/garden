@@ -3,6 +3,7 @@
 // This script will be run within the webview itself
 // It cannot access the main VS Code APIs directly.
 (function () {
+  // @ts-ignore
   const vscode = acquireVsCodeApi();
 
   // Handle messages sent from the extension to the webview
@@ -32,18 +33,20 @@
   }
 
   /**
-   * @param {Array<string>} plants
+   * @param {Array<object>} plants
    */
   function updatePlants(plants) {
-    const ul = document.getElementById("plant-list");
-    if (ul) {
-      ul.textContent = "";
+    const div = document.getElementById("plant-list");
+    if (div) {
+      div.textContent = "";
       for (const plant of plants) {
-        const li = document.createElement("li");
-        li.className = "plant-item";
-        li.innerHTML = plant;
+        const img = document.createElement("img");
+        img.src = plant.source;
+        img.style.left = plant.xcoord + "px";
+        img.style.top = plant.ycoord + "px";
+        img.classList.add("plant-img");
 
-        ul.appendChild(li);
+        div.appendChild(img);
       }
     }
   }

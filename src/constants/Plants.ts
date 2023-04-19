@@ -1,10 +1,17 @@
-import { Plant } from "../types/Plant";
+import { plantType } from "../types/Plant";
 
 export const plantTypes = ["monstera", "pothos", "ivy", "fern"];
 
-export const plants = {
-  monstera: { source: "../assets/plants", location: "ground" },
-  pothos: { source: "../assets/plants", location: "hanging" },
-  ivy: { source: "../assets/plants", location: "ground" },
-  fern: { source: "../assets/plants", location: "ground" }
+export const plantFiles = {
+  monstera: { source: "star.png", location: "ground" },
+  pothos: { source: "star.png", location: "hanging" },
+  ivy: { source: "star.png", location: "ground" },
+  fern: { source: "star.png", location: "ground" }
 };
+
+export const plantStringMap = new Map<string, plantType>([
+  ["monstera", "monstera"],
+  ["pothos", "pothos"],
+  ["ivy", "ivy"],
+  ["fern", "fern"]
+]);

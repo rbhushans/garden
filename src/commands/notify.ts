@@ -7,24 +7,29 @@ const sendNotification = (message: string, buttons?: string[]) => {
   return vscode.window.showInformationMessage(message, ...(buttons ?? []));
 };
 
-const sendWaterNotification = async (context: vscode.ExtensionContext) => {
-  while (true) {
-    const waterNotificationTime = SettingsManager.getWaterNotificationTime();
-    setTimeout(() => {
-      const shouldNotify = SettingsManager.getShouldNotify();
-      if (shouldNotify) {
-        sendNotification("Reminder to water your plants!", ["Water"]).then(
-          (value: string | undefined) => {
-            if (value === "Water") {
-              Water.waterPlants(context);
-            }
+//todo - not working
+const sendWaterNotification = (
+  context: vscode.ExtensionContext
+): NodeJS.Timer => {
+  const waterNotificationTime = SettingsManager.getWaterNotificationTime();
+
+  var intervalId = setInterval(function () {
+    const shouldNotify = SettingsManager.getShouldNotify();
+    if (shouldNotify) {
+      sendNotification("Reminder to water your plants!", ["Water"]).then(
+        (value: string | undefined) => {
+          if (value === "Water") {
+            Water.waterPlants(context);
           }
-        );
-      } else {
-        return;
-      }
-    }, waterNotificationTime * 60 * 60 * 1000);
-  }
+        }
+      );
+    } else {
+      return;
+    }
+    // call your function here
+  }, waterNotificationTime * 60 * 60 * 1000);
+
+  return intervalId;
 };
 
 export const Notify = {

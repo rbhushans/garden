@@ -32,6 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // command for refreshing plants
   let refreshCommand = vscode.commands.registerCommand("garden.refresh", () => {
+    SettingsManager.updateWaterAmount(50);
     Refresh.setRandomPlants(context);
     provider.updatePlants();
     vscode.window.showInformationMessage("The garden has been refreshed!");
@@ -52,20 +53,48 @@ export function activate(context: vscode.ExtensionContext) {
     let shouldNotifyAffected = event.affectsConfiguration(
       "garden.shouldNotify"
     );
+    let notificationTime = event.affectsConfiguration(
+      "garden.waterNotificationTime"
+    );
 
     if (plantsAffected) {
       const currentPlants: string[] = SettingsManager.getPlants();
       StateManager.updatePlants(context, currentPlants);
-      provider.updatePlants(currentPlants);
+      provider.updatePlants();
     }
 
     if (shouldNotifyAffected) {
       const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
       if (currentShouldNotify) {
-        Notify.sendWaterNotification(context);
+        StateManager.updateNotifyId(
+          context,
+          Notify.sendWaterNotification(context)
+        );
+      } else {
+        clearInterval(StateManager.getNotifyId(context));
+      }
+    }
+
+    if (notificationTime) {
+      clearInterval(StateManager.getNotifyId(context));
+      const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
+      if (currentShouldNotify) {
+        StateManager.updateNotifyId(
+          context,
+          Notify.sendWaterNotification(context)
+        );
       }
     }
   });
+
+  // const plants = SettingsManager.getPlants();
+  // console.log("UPDATING PLANTS WITH", plants);
+  // StateManager.updatePlants(context, plants);
+  // provider.updatePlants(plants);
+
+  // if (SettingsManager.getShouldNotify()) {
+  //   StateManager.updateNotifyId(context, Notify.sendWaterNotification(context));
+  // }
 }
 
 export function deactivate() {}

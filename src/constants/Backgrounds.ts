@@ -6,9 +6,10 @@ export const backgrounds: { [key: string]: Background } = {
   outside: {
     width: 100,
     height: 100,
-    plantAreaTopLeft: 0,
+    plantAreaTopLeftX: 0,
+    plantAreaTopLeftY: 0,
     plantAreaWidth: 100,
     plantAreaHeight: 100,
-    source: "../assets/background"
+    source: "../assets/backgrounds/outside.jpeg"
   }
 };

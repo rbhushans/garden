@@ -29,6 +29,11 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
+
+    // todo - need to see if way to avoid this hack
+    setTimeout(() => {
+      this.updatePlants();
+    }, 1000);
   }
 
   public waterPlants() {
@@ -46,11 +51,30 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  public updatePlants(plants?: string[]) {
+  public updatePlants() {
     if (this._view) {
       // this function will update the plants in the view
-      if (!plants) {
-        plants = StateManager.getPlants(this.extensionContext);
+      const plants = StateManager.getPlantArray(this.extensionContext);
+
+      const plantsWithSourceUri = [];
+      for (var i = 0; i < plants.length; i++) {
+        const plant = plants[i];
+        plantsWithSourceUri.push({
+          xcoord: plant.xcoord,
+          ycoord: plant.ycoord,
+          source: this._view.webview
+            .asWebviewUri(
+              vscode.Uri.joinPath(
+                this._extensionUri,
+                "src",
+                "assets",
+                "plants",
+                plant.source
+              )
+            )
+            .toString(),
+          location: plant.location
+        });
       }
 
       this._view.show?.(true);
@@ -58,7 +82,7 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       // now update the UI
       this._view.webview.postMessage({
         type: "updatePlants",
-        value: plants
+        value: plantsWithSourceUri
       });
     }
   }
