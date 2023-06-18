@@ -69,7 +69,6 @@ const updateWaterLevel = async (
   context: vscode.ExtensionContext,
   waterLevel: number
 ) => {
-  console.log("updating water level");
   await context.globalState.update("waterLevel", waterLevel);
 };
 

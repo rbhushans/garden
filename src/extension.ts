@@ -72,7 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
       if (currentShouldNotify) {
-        notifyId = Notify.sendWaterNotification(context);
+        notifyId = Notify.sendWaterNotification(provider, context);
       }
     }
 
@@ -80,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (notifyId) {
         clearInterval(notifyId);
       }
-      notifyId = Notify.sendWaterNotification(context);
+      notifyId = Notify.sendWaterNotification(provider, context);
     }
   });
 
@@ -90,7 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   if (SettingsManager.getShouldNotify()) {
     // StateManager.updateNotifyId(context, Notify.sendWaterNotification(context));
-    notifyId = Notify.sendWaterNotification(context);
+    notifyId = Notify.sendWaterNotification(provider, context);
   }
 }
 

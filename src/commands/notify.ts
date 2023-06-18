@@ -2,6 +2,7 @@
 import * as vscode from "vscode";
 import { SettingsManager } from "../managers/SettingsManager";
 import { Water } from "./Water";
+import { GardenViewProvider } from "../webview/GardenViewProvider";
 
 const sendNotification = (message: string, buttons?: string[]) => {
   return vscode.window.showInformationMessage(message, ...(buttons ?? []));
@@ -9,6 +10,7 @@ const sendNotification = (message: string, buttons?: string[]) => {
 
 //todo - not working
 const sendWaterNotification = (
+  provider: GardenViewProvider,
   context: vscode.ExtensionContext
 ): NodeJS.Timer => {
   const waterNotificationTime = SettingsManager.getWaterNotificationTime();
@@ -18,6 +20,7 @@ const sendWaterNotification = (
       (value: string | undefined) => {
         if (value === "Water") {
           Water.waterPlants(context);
+          provider.updateWater(true);
         }
       }
     );
