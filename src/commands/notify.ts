@@ -8,7 +8,6 @@ const sendNotification = (message: string, buttons?: string[]) => {
   return vscode.window.showInformationMessage(message, ...(buttons ?? []));
 };
 
-//todo - not working
 const sendWaterNotification = (
   provider: GardenViewProvider,
   context: vscode.ExtensionContext

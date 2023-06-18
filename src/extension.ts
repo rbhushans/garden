@@ -6,8 +6,12 @@ import { GardenViewProvider } from "./webview/GardenViewProvider";
 import { Notify } from "./commands/Notify";
 import { Water } from "./commands/Water";
 import { Refresh } from "./commands/Refresh";
+import { Timers } from "./types/Timers";
 
-let notifyId: NodeJS.Timer | undefined = undefined;
+let timerIds: Timers = {
+  notifyId: undefined,
+  waterId: undefined
+};
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("ACTIVATING");
@@ -66,21 +70,26 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     if (shouldNotifyAffected) {
-      if (notifyId) {
-        clearInterval(notifyId);
+      if (timerIds.notifyId) {
+        clearInterval(timerIds.notifyId);
       }
 
       const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
       if (currentShouldNotify) {
-        notifyId = Notify.sendWaterNotification(provider, context);
+        timerIds.notifyId = Notify.sendWaterNotification(provider, context);
       }
     }
 
     if (notificationTimeAffected) {
-      if (notifyId) {
-        clearInterval(notifyId);
+      if (timerIds.notifyId) {
+        clearInterval(timerIds.notifyId);
       }
-      notifyId = Notify.sendWaterNotification(provider, context);
+      timerIds.notifyId = Notify.sendWaterNotification(provider, context);
+
+      if (timerIds.waterId) {
+        clearInterval(timerIds.waterId);
+      }
+      timerIds.waterId = Water.decreaseWaterLevel(provider, context);
     }
   });
 
@@ -90,12 +99,17 @@ export function activate(context: vscode.ExtensionContext) {
 
   if (SettingsManager.getShouldNotify()) {
     // StateManager.updateNotifyId(context, Notify.sendWaterNotification(context));
-    notifyId = Notify.sendWaterNotification(provider, context);
+    timerIds.notifyId = Notify.sendWaterNotification(provider, context);
   }
+  timerIds.waterId = Water.decreaseWaterLevel(provider, context);
 }
 
 export function deactivate() {
-  if (notifyId) {
-    clearInterval(notifyId);
+  if (timerIds.notifyId) {
+    clearInterval(timerIds.notifyId);
+  }
+
+  if (timerIds.waterId) {
+    clearInterval(timerIds.waterId);
   }
 }
