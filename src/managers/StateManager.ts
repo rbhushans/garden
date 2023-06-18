@@ -47,12 +47,14 @@ const updatePlants = async (
   // array of plants and locations
   let plantArray: Plant[] = [];
 
-  let plant: string;
-  for (plant in plants) {
+  let ind: string;
+  for (ind in plants) {
+    const plant = plants[ind];
     const currentCoordinates = plantCoordinates.pop() ?? [0, 0];
     const plantMapped: plantType = plantStringMap.get(plant) ?? "fern";
 
     plantArray.push({
+      type: plantMapped,
       xcoord: currentCoordinates[0] + currentBackground.plantAreaTopLeftX,
       ycoord: currentCoordinates[1] + currentBackground.plantAreaTopLeftY,
       source: plantFiles[plantMapped].source,
@@ -67,6 +69,7 @@ const updateWaterLevel = async (
   context: vscode.ExtensionContext,
   waterLevel: number
 ) => {
+  console.log("updating water level");
   await context.globalState.update("waterLevel", waterLevel);
 };
 

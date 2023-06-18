@@ -4,6 +4,11 @@ const randomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };
 
+// min inclusive, max exclusive
+const randomIntInRange = (min: number, max: number) => {
+  return Math.random() * (max - min) + min;
+};
+
 // function to randomly distribute plants within area
 // returns list of coordinates
 const randomDistribution = (
@@ -11,16 +16,20 @@ const randomDistribution = (
   height: number,
   numPlants: number
 ): number[][] => {
-  return [
-    [0, 0],
-    [10, 10],
-    [20, 20],
-    [30, 30],
-    [40, 40]
-  ];
+  let coords = [];
+  let gridSize = Math.floor(width / numPlants);
+
+  for (var i = 0; i < width; i += gridSize) {
+    const randY = randomInt(height);
+    const randX = randomIntInRange(i, i + gridSize);
+    coords.push([randX, randY]);
+  }
+
+  return coords;
 };
 
 export const MathUtils = {
   randomInt,
+  randomIntInRange,
   randomDistribution
 };

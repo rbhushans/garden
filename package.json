@@ -94,7 +94,7 @@
         "garden.waterNotificationTime": {
           "type": "integer",
           "default": 30,
-          "description": "Time between water notifications (This is ignored if notifications are disabled)"
+          "description": "Time between water notifications (Minutes) (This is ignored if notifications are disabled)"
         },
         "garden.waterAmount": {
           "type": "integer",

@@ -10,8 +10,8 @@
   window.addEventListener("message", (event) => {
     const message = event.data; // The json data that the extension sent
     switch (message.type) {
-      case "waterPlants": {
-        waterPlants(message.value);
+      case "updateWater": {
+        updateWater(message.value);
         break;
       }
       case "updatePlants": {
@@ -24,7 +24,7 @@
   /**
    * @param {number} waterLevel
    */
-  function waterPlants(waterLevel) {
+  function updateWater(waterLevel) {
     // water the plants by increasing size of div
     const waterLevelObj = document.getElementById("water-level");
     if (waterLevelObj) {
@@ -45,6 +45,7 @@
         img.style.left = plant.xcoord + "px";
         img.style.top = plant.ycoord + "px";
         img.classList.add("plant-img");
+        img.title = plant.type;
 
         div.appendChild(img);
       }

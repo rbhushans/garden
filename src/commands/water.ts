@@ -4,6 +4,7 @@ import { SettingsManager } from "../managers/SettingsManager";
 import { StateManager } from "../managers/StateManager";
 
 const waterPlants = (context: vscode.ExtensionContext) => {
+  console.log("watering plants");
   const waterAmount = SettingsManager.getWaterAmount();
   const currentWaterLevel = StateManager.getWaterLevel(context);
   const newWaterLevel = Math.min(100, currentWaterLevel + waterAmount);

@@ -18,7 +18,6 @@ const randomPlants = (): string[] => {
 
 const setRandomPlants = (context: vscode.ExtensionContext) => {
   const newPlants = randomPlants();
-  StateManager.updatePlants(context, newPlants);
   SettingsManager.updatePlants(newPlants);
 };
 

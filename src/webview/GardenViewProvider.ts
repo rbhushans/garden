@@ -18,9 +18,10 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
-    context: vscode.WebviewViewResolveContext,
+    _context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
   ) {
+    console.log("RESOLVING");
     this._view = webviewView;
 
     webviewView.webview.options = {
@@ -30,28 +31,37 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
+    webviewView.onDidChangeVisibility(() => {
+      if (webviewView.visible) {
+        this.updateWater(false);
+        this.updatePlants(false);
+      }
+    });
+
     // todo - need to see if way to avoid this hack
     setTimeout(() => {
-      this.updatePlants();
+      this.updatePlants(true);
     }, 1000);
   }
 
-  public waterPlants() {
+  public updateWater(shouldShow: boolean) {
     if (this._view) {
       // this function will set the water bar correctly by retrieving the state
       const waterLevel = StateManager.getWaterLevel(this.extensionContext);
-
-      this._view.show?.(true);
+      console.log("WATER LEVEL", waterLevel);
+      if (shouldShow) {
+        this._view.show?.(true);
+      }
 
       // now update the UI
       this._view.webview.postMessage({
-        type: "waterPlants",
+        type: "updateWater",
         value: waterLevel
       });
     }
   }
 
-  public updatePlants() {
+  public updatePlants(shouldShow: boolean) {
     if (this._view) {
       // this function will update the plants in the view
       const plants = StateManager.getPlantArray(this.extensionContext);
@@ -60,6 +70,7 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       for (var i = 0; i < plants.length; i++) {
         const plant = plants[i];
         plantsWithSourceUri.push({
+          type: plant.type,
           xcoord: plant.xcoord,
           ycoord: plant.ycoord,
           source: this._view.webview
@@ -77,7 +88,9 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
         });
       }
 
-      this._view.show?.(true);
+      if (shouldShow) {
+        this._view.show?.(true);
+      }
 
       // now update the UI
       this._view.webview.postMessage({
