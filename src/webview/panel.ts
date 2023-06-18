@@ -21,6 +21,15 @@ const getWebView = (
       "outside.jpeg"
     )
   );
+  const loadingUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(
+      extensionUri,
+      "src",
+      "assets",
+      "loading",
+      "plant_loading_small.gif"
+    )
+  );
 
   return `<!DOCTYPE html>
     <html lang="en">
@@ -56,6 +65,10 @@ const getWebView = (
             Loading... 
           </div>
 				</div>
+
+        <div id="loading-div">
+          <img src="${loadingUri}">
+        </div>
 
         <script nonce="${nonce}" src="${scriptUri}"></script>
     </body>

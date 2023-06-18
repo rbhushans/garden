@@ -25,6 +25,10 @@
    * @param {number} waterLevel
    */
   function updateWater(waterLevel) {
+    const waterDiv = document.getElementById("water-level");
+    if (waterDiv) {
+      waterDiv.style.display = "block";
+    }
     // water the plants by increasing size of div
     const waterLevelObj = document.getElementById("water-level");
     if (waterLevelObj) {
@@ -36,6 +40,16 @@
    * @param {Array<object>} plants
    */
   function updatePlants(plants) {
+    const mainDiv = document.getElementById("main-div");
+    if (mainDiv) {
+      mainDiv.style.display = "block";
+    }
+
+    const loadingDiv = document.getElementById("loading-div");
+    if (loadingDiv) {
+      loadingDiv.style.display = "none";
+    }
+
     const div = document.getElementById("plant-list");
     if (div) {
       div.textContent = "";

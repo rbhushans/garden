@@ -41,7 +41,7 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     // todo - need to see if way to avoid this hack
     setTimeout(() => {
       this.updatePlants(true);
-    }, 1000);
+    }, 5000);
   }
 
   public updateWater(shouldShow: boolean) {

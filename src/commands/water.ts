@@ -22,8 +22,10 @@ const decreaseWaterLevel = (
 
   return setInterval(function () {
     const currentWaterLevel = StateManager.getWaterLevel(context);
-    StateManager.updateWaterLevel(context, currentWaterLevel - 1);
-    provider.updateWater(true);
+    if (currentWaterLevel >= 1) {
+      StateManager.updateWaterLevel(context, currentWaterLevel - 1);
+    }
+    provider.updateWater(false);
   }, stepSize * 60 * 1000);
 };
 
