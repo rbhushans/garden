@@ -14,7 +14,6 @@ let timerIds: Timers = {
 };
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log("ACTIVATING");
   // register provider for webview
   const provider = new GardenViewProvider(context.extensionUri, context);
 

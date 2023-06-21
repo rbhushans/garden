@@ -21,7 +21,6 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     _context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
   ) {
-    console.log("RESOLVING");
     this._view = webviewView;
 
     webviewView.webview.options = {
@@ -48,7 +47,6 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     if (this._view) {
       // this function will set the water bar correctly by retrieving the state
       const waterLevel = StateManager.getWaterLevel(this.extensionContext);
-      console.log("WATER LEVEL", waterLevel);
       if (shouldShow) {
         this._view.show?.(true);
       }
