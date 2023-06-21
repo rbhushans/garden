@@ -10,6 +10,6 @@ export const backgrounds: { [key: string]: Background } = {
     plantAreaTopLeftY: 0,
     plantAreaWidth: 100,
     plantAreaHeight: 100,
-    source: "../assets/backgrounds/outside.jpeg"
+    source: "outside.jpeg"
   }
 };

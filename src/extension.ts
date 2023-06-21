@@ -25,10 +25,10 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  //todo: need to get this working asynchronously and not blocking everything, maybe need to run at end of activate not sure
-  // if (SettingsManager.getShouldNotify()) {
-  //   Notify.sendWaterNotification(context);
-  // }
+  if (!StateManager.getPlantArray(context)) {
+    const plants = SettingsManager.getPlants();
+    StateManager.updatePlants(context, plants);
+  }
 
   // command for watering plants
   let waterCommand = vscode.commands.registerCommand("garden.water", () => {
@@ -92,10 +92,6 @@ export function activate(context: vscode.ExtensionContext) {
       timerIds.waterId = Water.decreaseWaterLevel(provider, context);
     }
   });
-
-  // const plants = SettingsManager.getPlants();
-  // StateManager.updatePlants(context, plants);
-  // provider.updatePlants(plants);
 
   if (SettingsManager.getShouldNotify()) {
     // StateManager.updateNotifyId(context, Notify.sendWaterNotification(context));

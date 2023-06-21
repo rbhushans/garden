@@ -15,6 +15,13 @@ const getShouldNotify = (): boolean => {
   );
 };
 
+const getIsModal = (): boolean => {
+  return (
+    vscode.workspace.getConfiguration("garden").get("isModal") ??
+    DefaultSettings.IS_MODAL_DEFAULT
+  );
+};
+
 const getWaterNotificationTime = (): number => {
   return (
     vscode.workspace.getConfiguration("garden").get("waterNotificationTime") ??
@@ -48,6 +55,12 @@ const updateShouldNotify = (shouldNotify: boolean) => {
     .update("shouldNotify", shouldNotify, vscode.ConfigurationTarget.Global);
 };
 
+const updateIsModal = (isModal: boolean) => {
+  vscode.workspace
+    .getConfiguration("garden")
+    .update("isModal", isModal, vscode.ConfigurationTarget.Global);
+};
+
 const updateWaterNotificationTime = (waterNotificationTime: number) => {
   vscode.workspace
     .getConfiguration("garden")
@@ -73,11 +86,13 @@ const updateBackground = (background: string) => {
 export const SettingsManager = {
   getPlants,
   getShouldNotify,
+  getIsModal,
   getWaterNotificationTime,
   getWaterAmount,
   getBackground,
   updatePlants,
   updateShouldNotify,
+  updateIsModal,
   updateWaterNotificationTime,
   updateWaterAmount,
   updateBackground

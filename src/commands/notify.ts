@@ -5,7 +5,11 @@ import { Water } from "./Water";
 import { GardenViewProvider } from "../webview/GardenViewProvider";
 
 const sendNotification = (message: string, buttons?: string[]) => {
-  return vscode.window.showInformationMessage(message, ...(buttons ?? []));
+  return vscode.window.showInformationMessage(
+    message,
+    { modal: SettingsManager.getIsModal() },
+    ...(buttons ?? [])
+  );
 };
 
 const sendWaterNotification = (

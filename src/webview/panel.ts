@@ -1,5 +1,6 @@
 // This file houses the HTML for the garden webview
 import * as vscode from "vscode";
+import { SettingsManager } from "../managers/SettingsManager";
 
 const getWebView = (
   nonce: string,
@@ -12,13 +13,14 @@ const getWebView = (
   const styleMainUri = webview.asWebviewUri(
     vscode.Uri.joinPath(extensionUri, "src", "webview", "styles", "main.css")
   );
+  console.log(SettingsManager.getBackground());
   const backgroundImageUri = webview.asWebviewUri(
     vscode.Uri.joinPath(
       extensionUri,
       "src",
       "assets",
       "backgrounds",
-      "outside.jpeg"
+      SettingsManager.getBackground().source
     )
   );
   const loadingUri = webview.asWebviewUri(

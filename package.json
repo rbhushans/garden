@@ -91,6 +91,11 @@
           "default": true,
           "description": "Should the extension notify you when the plants need water?"
         },
+        "garden.isModal": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable this to make the water message be a modal that forces a response."
+        },
         "garden.waterNotificationTime": {
           "type": "integer",
           "default": 30,
