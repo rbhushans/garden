@@ -36,24 +36,64 @@ const updatePlants = async (
   context: vscode.ExtensionContext,
   plants: string[]
 ) => {
+  // get difference in list of plants
+  const currentPlants = getPlants(context);
+  const newPlants = plants.slice();
+
+  // plants copy will have any extra plants added
+  for (var i = 0; i < currentPlants.length; i++) {
+    const plant = currentPlants[i];
+    const index = newPlants.indexOf(plant);
+    if (index !== -1) {
+      newPlants.splice(index, 1);
+    }
+  }
+
+  // currentPlants will have any plants removed
+  for (var i = 0; i < plants.length; i++) {
+    const plant = plants[i];
+    const index = currentPlants.indexOf(plant);
+    // console.log("PLANT INDEX", plant, index);
+    if (index !== -1) {
+      currentPlants.splice(index, 1);
+    }
+  }
+
+  // update list of plant names
   await context.globalState.update("plants", plants);
+
+  // remove plants (this will in almost all cases be only a single one)
+  const currentPlantArray = getPlantArray(context);
+
+  for (var i = 0; i < currentPlants.length; i++) {
+    const searchPlant = currentPlants[i];
+    for (var j = 0; j < currentPlantArray.length; j++) {
+      const plantObj = currentPlantArray[j];
+      if (plantObj.type === searchPlant) {
+        currentPlantArray.splice(j, 1);
+        break;
+      }
+    }
+  }
+
+  // at this point, currentPlantArray has the current state, and we
+  // need to just add the new plants in newPlants
+
   const currentBackground = getBackground(context);
   const plantCoordinates = MathUtils.randomDistribution(
     currentBackground.plantAreaWidth,
     currentBackground.plantAreaHeight,
-    plants.length
+    newPlants.length
   );
 
-  // array of plants and locations
-  let plantArray: Plant[] = [];
-
   let ind: string;
-  for (ind in plants) {
-    const plant = plants[ind];
+  for (ind in newPlants) {
+    const plant = newPlants[ind];
+
     const currentCoordinates = plantCoordinates.pop() ?? [0, 0];
     const plantMapped: plantType = plantStringMap.get(plant) ?? "fern";
 
-    plantArray.push({
+    currentPlantArray.push({
       type: plantMapped,
       xcoord: currentCoordinates[0] + currentBackground.plantAreaTopLeftX,
       ycoord: currentCoordinates[1] + currentBackground.plantAreaTopLeftY,
@@ -62,7 +102,7 @@ const updatePlants = async (
     });
   }
 
-  await context.globalState.update("plantArray", plantArray);
+  await context.globalState.update("plantArray", currentPlantArray);
 };
 
 const updateWaterLevel = async (
