@@ -39,7 +39,6 @@ export function activate(context: vscode.ExtensionContext) {
   // command for refreshing plants
   let refreshCommand = vscode.commands.registerCommand("garden.refresh", () => {
     Refresh.setRandomPlants(context);
-    // provider.updatePlants();
     vscode.window.showInformationMessage("The garden has been refreshed!");
   });
 

@@ -7,7 +7,7 @@ import { GardenViewProvider } from "../webview/GardenViewProvider";
 const waterPlants = (context: vscode.ExtensionContext) => {
   const waterAmount = SettingsManager.getWaterAmount();
   const currentWaterLevel = StateManager.getWaterLevel(context);
-  const newWaterLevel = Math.min(100, currentWaterLevel + waterAmount);
+  const newWaterLevel = Math.min(80, currentWaterLevel + waterAmount);
   StateManager.updateWaterLevel(context, newWaterLevel);
 };
 

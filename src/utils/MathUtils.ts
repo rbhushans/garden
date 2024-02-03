@@ -19,7 +19,7 @@ const randomDistribution = (
   let coords = [];
   let gridSize = Math.floor(width / numPlants);
 
-  for (var i = 0; i < width; i += gridSize) {
+  for (var i = 0; i <= width - gridSize; i += gridSize) {
     const randY = randomInt(height);
     const randX = randomIntInRange(i, i + gridSize);
     coords.push([randX, randY]);

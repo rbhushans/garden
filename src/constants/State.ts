@@ -1,16 +1,9 @@
 import { Background } from "../types/Background";
+import { backgrounds } from "./Backgrounds";
 
 const WATER_LEVEL_DEFAULT = 100;
 
-const BACKGROUND_DEFAULT: Background = {
-  width: 100,
-  height: 100,
-  plantAreaTopLeftX: 0,
-  plantAreaTopLeftY: 0,
-  plantAreaWidth: 100,
-  plantAreaHeight: 100,
-  source: "../assets/backgrounds/outside.jpeg"
-};
+const BACKGROUND_DEFAULT: Background = backgrounds["outside"];
 
 export const DefaultState = {
   WATER_LEVEL_DEFAULT,

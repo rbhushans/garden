@@ -32,7 +32,7 @@
     // water the plants by increasing size of div
     const waterLevelObj = document.getElementById("water-level");
     if (waterLevelObj) {
-      waterLevelObj.style.height = `${waterLevel}px`;
+      waterLevelObj.style.height = `${waterLevel}%`;
     }
   }
 
@@ -56,8 +56,8 @@
       for (const plant of plants) {
         const img = document.createElement("img");
         img.src = plant.source;
-        img.style.left = plant.xcoord + "px";
-        img.style.top = plant.ycoord + "px";
+        img.style.left = plant.xcoord + "%";
+        img.style.top = plant.ycoord + "%";
         img.classList.add("plant-img");
         img.title = plant.type;
 

@@ -1,6 +1,7 @@
 #main-div {
   position: relative;
   display: none;
+  width: 100%;
 }
 
 #loading-div {
@@ -9,12 +10,12 @@
 
 #water-level {
   display: none;
-  height: 100px;
+  height: 80%;
   width: 10px;
   background-color: blue;
   position: absolute;
-  top: 0;
-  right: 10;
+  bottom: 10%;
+  right: 10px;
 }
 
 #plant-list {
@@ -25,8 +26,8 @@
   position: absolute;
   padding: 0.5rem;
   margin: 4px;
-  height: 20px;
-  width: 20px;
+  height: 8vw;
+  width: 8vw;
 }
 
 #background-img {
