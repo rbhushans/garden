@@ -13,6 +13,14 @@ Commands:
 
 Can also drag to the VSCode Left Panel or within a subpanel (e.g. the file explorer)
 
+## Installation
+
+Install the latest published version from the VSCode Marketplace.
+
+Alternatively, see the latest releases on Github, and download the .vsix file. To install the file, go to the Extensions tab in VSCode, click the three dots at the top, and select "Install from VSIX", choose the downloaded file.
+
+If the Garden window can't be found, click "CMD + SHIFT + P", search garden, and select the "Focus on Garden View" option.
+
 ## Requirements
 
 - VSCode version > 1.77.0 (might work on older versions, but can't guarantee no bugs)
