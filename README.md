@@ -2,7 +2,7 @@
 
 This VS Code extension adds a fun garden to the UI, and reminds you to drink water!
 
-![](src/assets/documentation/garden_beta_demo.gif)
+![beta demo](https://github.com/rbhushans/garden/blob/main/src/assets/documentation/garden_beta_demo.gif?raw=true)
 
 ## Features
 
