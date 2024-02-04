@@ -53,7 +53,6 @@ const updatePlants = async (
   for (var i = 0; i < plants.length; i++) {
     const plant = plants[i];
     const index = currentPlants.indexOf(plant);
-    // console.log("PLANT INDEX", plant, index);
     if (index !== -1) {
       currentPlants.splice(index, 1);
     }
@@ -80,10 +79,11 @@ const updatePlants = async (
   // need to just add the new plants in newPlants
 
   const currentBackground = getBackground(context);
+  console.log("NEW PLANTS", newPlants);
   const plantCoordinates = MathUtils.randomDistribution(
     currentBackground.plantAreaWidth,
     currentBackground.plantAreaHeight,
-    newPlants.length
+    newPlants
   );
 
   let ind: string;

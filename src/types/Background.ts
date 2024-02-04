@@ -1,6 +1,7 @@
 import { backgrounds } from "../constants/Backgrounds";
 
 export interface Background {
+  theme: string;
   width: number;
   height: number;
   plantAreaTopLeftX: number;

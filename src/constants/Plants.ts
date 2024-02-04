@@ -3,10 +3,10 @@ import { plantType } from "../types/Plant";
 export const plantTypes = ["monstera", "pothos", "ivy", "fern"];
 
 export const plantFiles = {
-  monstera: { source: "star.png", location: "ground" },
-  pothos: { source: "star.png", location: "hanging" },
-  ivy: { source: "star.png", location: "ground" },
-  fern: { source: "star.png", location: "ground" }
+  monstera: { source: "monstera.png", location: "ground" },
+  pothos: { source: "pothos.png", location: "hanging" },
+  ivy: { source: "ivy.png", location: "ground" },
+  fern: { source: "fern.png", location: "ground" }
 };
 
 export const plantStringMap = new Map<string, plantType>([

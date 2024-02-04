@@ -2,6 +2,8 @@
 
 This VS Code extension adds a fun garden to the UI, and reminds you to drink water!
 
+![](src/assets/documentation/garden_beta_demo.gif)
+
 ## Features
 
 TK

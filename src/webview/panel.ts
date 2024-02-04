@@ -13,13 +13,16 @@ const getWebView = (
   const styleMainUri = webview.asWebviewUri(
     vscode.Uri.joinPath(extensionUri, "src", "webview", "styles", "main.css")
   );
+  const background = SettingsManager.getBackground();
+
   const backgroundImageUri = webview.asWebviewUri(
     vscode.Uri.joinPath(
       extensionUri,
       "src",
       "assets",
-      "backgrounds",
-      SettingsManager.getBackground().source
+      "themes",
+      background.theme,
+      background.source
     )
   );
   const loadingUri = webview.asWebviewUri(

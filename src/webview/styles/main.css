@@ -6,6 +6,7 @@
 
 #loading-div {
   display: block;
+  left: 50%;
 }
 
 #water-level {
@@ -26,8 +27,8 @@
   position: absolute;
   padding: 0.5rem;
   margin: 4px;
-  height: 8vw;
-  width: 8vw;
+  height: 10vw;
+  width: 10vw;
 }
 
 #background-img {

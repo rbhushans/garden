@@ -63,6 +63,7 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     if (this._view) {
       // this function will update the plants in the view
       const plants = StateManager.getPlantArray(this.extensionContext);
+      const theme = StateManager.getBackground(this.extensionContext).theme;
 
       const plantsWithSourceUri = [];
       for (var i = 0; i < plants.length; i++) {
@@ -77,7 +78,8 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
                 this._extensionUri,
                 "src",
                 "assets",
-                "plants",
+                "themes",
+                theme,
                 plant.source
               )
             )
