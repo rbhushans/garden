@@ -76,7 +76,6 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
             .asWebviewUri(
               vscode.Uri.joinPath(
                 this._extensionUri,
-                "src",
                 "assets",
                 "themes",
                 theme,

@@ -28,7 +28,7 @@
           "type": "webview",
           "id": "garden.gardenView",
           "name": "Garden",
-          "icon": "src/assets/icons/gardenIcon.svg"
+          "icon": "./assets/icons/gardenIcon.svg"
         }
       ]
     },
@@ -37,16 +37,16 @@
         "command": "garden.water",
         "title": "Garden: Water",
         "icon": {
-          "light": "src/assets/icons/light/watering-can-light.svg",
-          "dark": "src/assets/icons/dark/watering-can-dark.svg"
+          "light": "./assets/icons/light/watering-can-light.svg",
+          "dark": "./assets/icons/dark/watering-can-dark.svg"
         }
       },
       {
         "command": "garden.refresh",
         "title": "Garden: Refresh",
         "icon": {
-          "light": "src/assets/icons/light/refresh.svg",
-          "dark": "src/assets/icons/dark/refresh.svg"
+          "light": "./assets/icons/light/refresh.svg",
+          "dark": "./assets/icons/dark/refresh.svg"
         }
       },
       {

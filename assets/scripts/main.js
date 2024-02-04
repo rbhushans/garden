@@ -51,6 +51,8 @@
     }
 
     const div = document.getElementById("plant-list");
+    const debug = document.getElementById("debugger");
+
     if (div) {
       div.textContent = "";
       for (const plant of plants) {
@@ -59,7 +61,11 @@
         img.style.left = plant.xcoord + "%";
         img.style.top = plant.ycoord + "%";
         img.classList.add("plant-img");
-        img.title = plant.type;
+        img.title = plant.source;
+        if (debug) {
+          debug.textContent =
+            debug.textContent?.concat("\n", plant.source) ?? "";
+        }
 
         div.appendChild(img);
       }

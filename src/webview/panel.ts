@@ -8,17 +8,16 @@ const getWebView = (
   webview: vscode.Webview
 ) => {
   const scriptUri = webview.asWebviewUri(
-    vscode.Uri.joinPath(extensionUri, "src", "webview", "main.js")
+    vscode.Uri.joinPath(extensionUri, "assets", "scripts", "main.js")
   );
   const styleMainUri = webview.asWebviewUri(
-    vscode.Uri.joinPath(extensionUri, "src", "webview", "styles", "main.css")
+    vscode.Uri.joinPath(extensionUri, "assets", "styles", "main.css")
   );
   const background = SettingsManager.getBackground();
 
   const backgroundImageUri = webview.asWebviewUri(
     vscode.Uri.joinPath(
       extensionUri,
-      "src",
       "assets",
       "themes",
       background.theme,
@@ -28,7 +27,6 @@ const getWebView = (
   const loadingUri = webview.asWebviewUri(
     vscode.Uri.joinPath(
       extensionUri,
-      "src",
       "assets",
       "loading",
       "plant_loading_small.gif"
