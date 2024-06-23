@@ -2,7 +2,7 @@
   "name": "vsc-garden",
   "displayName": "VSCode Garden",
   "description": "This extension provides the user with a personalized garden.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.77.0"
   },
