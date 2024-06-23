@@ -13,7 +13,28 @@
   display: none;
   height: 80%;
   width: 10px;
-  background-color: blue;
+  background-color: rgb(33, 98, 211);
+  position: absolute;
+  bottom: 10%;
+  right: 10px;
+  border-width: 1px;
+  border-color: black;
+  border-bottom-left-radius: 300px;
+  border-bottom-right-radius: 300px;
+  border-style: solid;
+  border-top: 0px solid black;
+}
+
+#water-level-back {
+  display: "block";
+  height: 80%;
+  width: 10px;
+  background-color: rgba(0, 0, 0, 0.302);
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  border-bottom-left-radius: 300px;
+  border-bottom-right-radius: 300px;
   position: absolute;
   bottom: 10%;
   right: 10px;
@@ -27,8 +48,8 @@
   position: absolute;
   padding: 0.5rem;
   margin: 4px;
-  height: 20vw;
-  width: 20vw;
+  height: 24vw;
+  width: 24vw;
 }
 
 #background-img {

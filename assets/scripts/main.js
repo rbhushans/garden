@@ -36,7 +36,9 @@
     // water the plants by increasing size of div
     const waterLevelObj = document.getElementById("water-level");
     if (waterLevelObj) {
-      waterLevelObj.style.height = `${waterLevel}%`;
+      waterLevelObj.style.height = `${
+        Number(waterLevel) < 1 ? 0 : waterLevel
+      }%`;
     }
   }
 
