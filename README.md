@@ -1,4 +1,11 @@
-# garden
+<div align="center">
+	<img src="assets/icons/logo.png" width="200" height="200">
+	<h1>VSCode Garden</h1>
+	<p>
+		<b>Add a fun garden to your coding experience!</b>
+	</p>
+	<br>
+</div>
 
 This VS Code extension adds a fun garden to the UI, and reminds you to drink water!
 
@@ -40,14 +47,18 @@ This extension contributes the following settings:
 
 No major issues known at this time. For current bugs/features to be implemented, see bugs.md.
 
-Current goal is to add updated icons and artwork before publishing to the VSCode marketplace.
-
 ## Release Notes
 
 ### 0.0.1
 
 See releases for VSIX packaged extension - pre-release.
 
-### 1.0.0 (Soon!)
+### 1.0.2
 
-Initial release of the Garden extension on VS Code!
+Initial release of the Garden extension on VS Code! Comes with two themes
+
+## Artists
+
+Backyard - https://brigessartprices.carrd.co/
+
+Outside - Art of Elisa

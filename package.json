@@ -1,11 +1,12 @@
 {
-  "name": "garden",
-  "displayName": "Garden",
+  "name": "vsc-garden",
+  "displayName": "VSCode Garden",
   "description": "This extension provides the user with a personalized garden.",
   "version": "1.0.1",
   "engines": {
     "vscode": "^1.77.0"
   },
+  "icon": "./assets/icons/logo.png",
   "repository": {
     "type": "git",
     "url": "git://github.com/rbhushans/garden.git"
