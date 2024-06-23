@@ -60,6 +60,7 @@ export function activate(context: vscode.ExtensionContext) {
     let notificationTimeAffected = event.affectsConfiguration(
       "garden.waterNotificationTime"
     );
+    let backgroundAffected = event.affectsConfiguration("garden.background");
 
     if (plantsAffected) {
       const currentPlants: string[] = SettingsManager.getPlants();
@@ -88,6 +89,16 @@ export function activate(context: vscode.ExtensionContext) {
         clearInterval(timerIds.waterId);
       }
       timerIds.waterId = Water.decreaseWaterLevel(provider, context);
+    }
+
+    // When we swap a background, we refresh the plants
+    if (backgroundAffected) {
+      await StateManager.updateBackground(
+        context,
+        SettingsManager.getBackground()
+      );
+      Refresh.setRandomPlants(context);
+      provider.updateBackground();
     }
   });
 

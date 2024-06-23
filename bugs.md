@@ -1,8 +1,8 @@
 ### Open Bugs
 
-- [p0] Images aren't loading - the relative URLs may not be working
-- [p0] The art needs to be updated
 - [p0] Publish the extension
+- [p0] Spread out new plants between areas
 - [p1] Add unit tests
-- [p1] Add more backgrounds
 - [p1] Fade loading and view
+- [p1] Add levels to plants (based on water level)
+- [p1] Add valid/invalid plants for themes

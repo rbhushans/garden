@@ -114,7 +114,8 @@
         "garden.background": {
           "type": "string",
           "enum": [
-            "outside"
+            "outside",
+            "backyard"
           ],
           "default": "outside",
           "description": "Background for Garden"

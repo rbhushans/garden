@@ -4,11 +4,18 @@ export interface Background {
   theme: string;
   width: number;
   height: number;
-  plantAreaTopLeftX: number;
-  plantAreaTopLeftY: number;
+  source: string;
+  plantAreas: PlantArea[];
+}
+
+// define coords and dims as a %
+export interface PlantArea {
+  plantAreaTopLeftX: number; //from the left of the screen
+  plantAreaTopLeftY: number; // from the top of the screen
   plantAreaWidth: number;
   plantAreaHeight: number;
-  source: string;
+  occupationCount: number;
+  occupationLimit: number;
 }
 
 export type backgroundType = keyof typeof backgrounds;

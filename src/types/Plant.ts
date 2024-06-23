@@ -8,6 +8,7 @@ export interface Plant {
   location: plantLocation;
   xcoord: number;
   ycoord: number;
+  plantAreaIndex: number;
 }
 
 export type plantType = keyof typeof plantFiles;

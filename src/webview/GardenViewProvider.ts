@@ -59,6 +59,29 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     }
   }
 
+  public updateBackground() {
+    if (this._view) {
+      const background = StateManager.getBackground(this.extensionContext);
+      const uri = this._view.webview
+        .asWebviewUri(
+          vscode.Uri.joinPath(
+            this._extensionUri,
+            "assets",
+            "themes",
+            background.theme,
+            background.source
+          )
+        )
+        .toString();
+
+      // now update the UI
+      this._view.webview.postMessage({
+        type: "updateBackground",
+        value: uri
+      });
+    }
+  }
+
   public updatePlants(shouldShow: boolean) {
     if (this._view) {
       // this function will update the plants in the view

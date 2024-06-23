@@ -58,7 +58,7 @@ const getWebView = (
     <body>
 
         <div id="main-div">
-          <img src="${backgroundImageUri}">
+          <img id="background-img" src="${backgroundImageUri}">
 
           <div id="water-level">
           </div>

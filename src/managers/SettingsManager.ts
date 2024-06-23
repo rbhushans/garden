@@ -79,8 +79,8 @@ const updateWaterAmount = (waterAmount: number) => {
 
 const updateBackground = (background: string) => {
   vscode.workspace
-    .getConfiguration("background")
-    .update("waterAmount", background, vscode.ConfigurationTarget.Global);
+    .getConfiguration("garden")
+    .update("background", background, vscode.ConfigurationTarget.Global);
 };
 
 export const SettingsManager = {

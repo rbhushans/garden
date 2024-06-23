@@ -18,6 +18,10 @@
         updatePlants(message.value);
         break;
       }
+      case "updateBackground": {
+        updateBackground(message.value);
+        break;
+      }
     }
   });
 
@@ -51,7 +55,11 @@
     }
 
     const div = document.getElementById("plant-list");
-    const debug = document.getElementById("debugger");
+    // const debug = document.getElementById("debugger");
+    // if (debug) {
+    //   debug.textContent =
+    //     debug.textContent?.concat("\n START ", plants.toString()) ?? " END";
+    // }
 
     if (div) {
       div.textContent = "";
@@ -62,13 +70,21 @@
         img.style.top = plant.ycoord + "%";
         img.classList.add("plant-img");
         img.title = plant.source;
-        if (debug) {
-          debug.textContent =
-            debug.textContent?.concat("\n", plant.source) ?? "";
-        }
 
         div.appendChild(img);
       }
+    }
+  }
+
+  /**
+   * @param {string} backgroundUri
+   */
+  function updateBackground(backgroundUri) {
+    // update image
+    const img = document.getElementById("background-img");
+    if (img) {
+      // @ts-ignore
+      img.src = backgroundUri;
     }
   }
 })();

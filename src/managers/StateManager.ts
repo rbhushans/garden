@@ -36,11 +36,19 @@ const updatePlants = async (
   context: vscode.ExtensionContext,
   plants: string[]
 ) => {
+  const currentBackground = getBackground(context);
+
+  if (plants.length === 0) {
+    await context.globalState.update("plants", []);
+    await context.globalState.update("plantArray", []);
+    await resetBackgroundState(context);
+    return;
+  }
   // get difference in list of plants
   const currentPlants = getPlants(context);
   const newPlants = plants.slice();
 
-  // plants copy will have any extra plants added
+  // newPlants will have any extra plants added
   for (var i = 0; i < currentPlants.length; i++) {
     const plant = currentPlants[i];
     const index = newPlants.indexOf(plant);
@@ -69,23 +77,45 @@ const updatePlants = async (
     for (var j = 0; j < currentPlantArray.length; j++) {
       const plantObj = currentPlantArray[j];
       if (plantObj.type === searchPlant) {
+        // remove the plant
         currentPlantArray.splice(j, 1);
+        // update the count for the background
+        currentBackground.plantAreas[plantObj.plantAreaIndex].occupationCount--;
         break;
       }
     }
   }
 
-  // at this point, currentPlantArray has the current state, and we
-  // need to just add the new plants in newPlants
+  // get list of all valid plant areas
+  let validPlantIndices = [];
+  for (var i = 0; i < currentBackground.plantAreas.length; i++) {
+    const curr = currentBackground.plantAreas[i];
+    // TODO - we could make this better by putting each new plant into a
+    // separate area
+    if (curr.occupationCount + newPlants.length < curr.occupationLimit) {
+      validPlantIndices.push(i);
+    }
+  }
 
-  const currentBackground = getBackground(context);
-  console.log("NEW PLANTS", newPlants);
+  // if everythings full, we're just going to add to a random one
+  if (validPlantIndices.length === 0) {
+    validPlantIndices = [...Array(currentBackground.plantAreas).keys()];
+  }
+
+  // choose a random index of the valid indices
+  const randomInd = MathUtils.randomIntInRange(0, validPlantIndices.length);
+  const selectedInd = validPlantIndices[randomInd];
+  const plantArea = currentBackground.plantAreas[selectedInd];
+
+  // construct a random distribution in the area
   const plantCoordinates = MathUtils.randomDistribution(
-    currentBackground.plantAreaWidth,
-    currentBackground.plantAreaHeight,
+    plantArea.plantAreaWidth,
+    plantArea.plantAreaHeight,
     newPlants
   );
 
+  // at this point, currentPlantArray has the current state, and we
+  // need to just add the new plants in newPlants
   let ind: string;
   for (ind in newPlants) {
     const plant = newPlants[ind];
@@ -95,14 +125,17 @@ const updatePlants = async (
 
     currentPlantArray.push({
       type: plantMapped,
-      xcoord: currentCoordinates[0] + currentBackground.plantAreaTopLeftX,
-      ycoord: currentCoordinates[1] + currentBackground.plantAreaTopLeftY,
+      xcoord: plantArea.plantAreaTopLeftX + currentCoordinates[0],
+      ycoord: plantArea.plantAreaTopLeftY + currentCoordinates[1],
       source: plantFiles[plantMapped].source,
-      location: plantFiles[plantMapped].location as plantLocation
+      location: plantFiles[plantMapped].location as plantLocation,
+      plantAreaIndex: selectedInd
     });
+    currentBackground.plantAreas[selectedInd].occupationCount++;
   }
 
   await context.globalState.update("plantArray", currentPlantArray);
+  await updateBackground(context, currentBackground);
 };
 
 const updateWaterLevel = async (
@@ -124,6 +157,20 @@ const updateBackground = async (
   background: Background
 ) => {
   await context.globalState.update("background", background);
+};
+
+const resetBackgroundState = async (context: vscode.ExtensionContext) => {
+  const background = getBackground(context);
+  const resetBackground: Background = {
+    ...background,
+    plantAreas: background.plantAreas.map((plantArea) => {
+      return {
+        ...plantArea,
+        occupationCount: 0
+      };
+    })
+  };
+  await updateBackground(context, resetBackground);
 };
 
 export const StateManager = {

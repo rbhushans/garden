@@ -1,7 +1,6 @@
 // This file houses all utility functions related to math
 
 import { plantFiles, plantStringMap } from "../constants/Plants";
-import { Plant, plantType } from "../types/Plant";
 
 const randomInt = (max: number) => {
   return Math.floor(Math.random() * max);
@@ -9,7 +8,10 @@ const randomInt = (max: number) => {
 
 // min inclusive, max exclusive
 const randomIntInRange = (min: number, max: number) => {
-  return Math.random() * (max - min) + min;
+  max = max - 1;
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // function to randomly distribute plants within area

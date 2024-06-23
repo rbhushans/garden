@@ -27,8 +27,8 @@
   position: absolute;
   padding: 0.5rem;
   margin: 4px;
-  height: 10vw;
-  width: 10vw;
+  height: 20vw;
+  width: 20vw;
 }
 
 #background-img {
@@ -36,4 +36,9 @@
   object-fit: cover;
   width: 100%;
   height: auto;
+}
+
+#debugger {
+  background-color: blue;
+  position: absolute;
 }
