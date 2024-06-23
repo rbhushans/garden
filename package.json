@@ -2,7 +2,7 @@
   "name": "garden",
   "displayName": "Garden",
   "description": "This extension provides the user with a personalized garden.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.77.0"
   },
