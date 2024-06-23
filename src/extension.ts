@@ -97,8 +97,9 @@ export function activate(context: vscode.ExtensionContext) {
         context,
         SettingsManager.getBackground()
       );
-      Refresh.setRandomPlants(context);
+      StateManager.updatePlants(context, []);
       provider.updateBackground();
+      Refresh.setRandomPlants(context);
     }
   });
 
