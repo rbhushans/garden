@@ -52,7 +52,11 @@
       },
       {
         "command": "garden.edit",
-        "title": "Garden: Edit"
+        "title": "Garden: Edit",
+        "icon": {
+          "light": "./assets/icons/light/edit.svg",
+          "dark": "./assets/icons/dark/edit.svg"
+        }
       }
     ],
     "menus": {
@@ -64,6 +68,11 @@
         },
         {
           "command": "garden.refresh",
+          "group": "navigation",
+          "when": "view == garden.gardenView"
+        },
+        {
+          "command": "garden.edit",
           "group": "navigation",
           "when": "view == garden.gardenView"
         }
