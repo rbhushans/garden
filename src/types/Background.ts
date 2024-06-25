@@ -16,6 +16,7 @@ export interface PlantArea {
   plantAreaHeight: number;
   occupationCount: number;
   occupationLimit: number;
+  scale?: number;
 }
 
 export type backgroundType = keyof typeof backgrounds;

@@ -92,7 +92,7 @@ const updatePlants = async (
     const curr = currentBackground.plantAreas[i];
     // TODO - we could make this better by putting each new plant into a
     // separate area
-    if (curr.occupationCount + newPlants.length < curr.occupationLimit) {
+    if (curr.occupationCount + newPlants.length <= curr.occupationLimit) {
       validPlantIndices.push(i);
     }
   }
@@ -129,7 +129,8 @@ const updatePlants = async (
       ycoord: plantArea.plantAreaTopLeftY + currentCoordinates[1],
       source: plantFiles[plantMapped].source,
       location: plantFiles[plantMapped].location as plantLocation,
-      plantAreaIndex: selectedInd
+      plantAreaIndex: selectedInd,
+      scale: plantArea.scale ?? 1
     });
     currentBackground.plantAreas[selectedInd].occupationCount++;
   }

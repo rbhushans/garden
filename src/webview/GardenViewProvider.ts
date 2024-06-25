@@ -106,9 +106,12 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
               )
             )
             .toString(),
-          location: plant.location
+          location: plant.location,
+          scale: plant.scale
         });
       }
+
+      plantsWithSourceUri.sort((a, b) => a.scale - b.scale);
 
       if (shouldShow) {
         this._view.show?.(true);

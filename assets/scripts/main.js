@@ -72,6 +72,8 @@
         img.style.top = plant.ycoord + "%";
         img.classList.add("plant-img");
         img.title = plant.source;
+        // img.style.height = plant.scale * 24 + "vw";
+        // img.style.width = plant.scale * 24 + "vw";
 
         div.appendChild(img);
       }

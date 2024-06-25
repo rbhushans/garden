@@ -4,7 +4,7 @@ export const plantTypes = ["monstera", "pothos", "ivy", "fern"];
 
 export const plantFiles = {
   monstera: { source: "monstera.png", location: "ground" },
-  pothos: { source: "pothos.png", location: "hanging" },
+  pothos: { source: "pothos.png", location: "ground" },
   ivy: { source: "ivy.png", location: "ground" },
   fern: { source: "fern.png", location: "ground" }
 };

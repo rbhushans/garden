@@ -116,9 +116,10 @@
           "type": "string",
           "enum": [
             "outside",
-            "backyard"
+            "backyard",
+            "balcony"
           ],
-          "default": "outside",
+          "default": "backyard",
           "description": "Background for Garden"
         }
       }
