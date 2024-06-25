@@ -49,13 +49,7 @@ No major issues known at this time. For current bugs/features to be implemented,
 
 ## Release Notes
 
-### 1.0.2
-
-Initial release of the Garden extension on VS Code! Comes with two themes
-
-### 0.0.1
-
-See releases for VSIX packaged extension - pre-release.
+See CHANGELOG.md
 
 ## Artists
 
