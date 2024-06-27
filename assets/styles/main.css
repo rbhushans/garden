@@ -1,13 +1,28 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  background-color: transparent;
+}
+
+#parent {
+  min-height: 100%;
+  position: relative;
+}
+
 #main-div {
   position: relative;
   display: none;
-  width: calc(100% + 40px);
-  left: -20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
 }
 
 #loading-div {
   display: block;
-  left: 50%;
+  left: 20%;
+  position: fixed;
+  bottom: 0px;
 }
 
 #water-level {

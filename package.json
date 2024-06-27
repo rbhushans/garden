@@ -1,11 +1,40 @@
 {
   "name": "vsc-garden",
+  "author": "RohanBhushan",
   "displayName": "VSCode Garden",
-  "description": "This extension provides the user with a personalized garden.",
+  "description": "Have fun with a garden!",
+  "keywords": [
+    "garden",
+    "plant",
+    "water",
+    "reminder",
+    "fun"
+  ],
   "version": "1.1.1",
   "engines": {
     "vscode": "^1.77.0"
   },
+  "galleryBanner": {
+    "color": "#C80000",
+    "theme": "dark"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/v/RohanBhushan.vsc-garden?color=blue&logo=visual-studio",
+      "description": "version",
+      "href": "https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden&ssr=false#version-history"
+    },
+    {
+      "url": "https://vsmarketplacebadges.dev/downloads/RohanBhushan.vsc-garden.svg",
+      "description": "downloads",
+      "href": "https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden"
+    },
+    {
+      "url": "https://vsmarketplacebadges.dev/rating-star/RohanBhushan.vsc-garden.svg",
+      "description": "rating",
+      "href": "https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden&ssr=false#review-details"
+    }
+  ],
   "icon": "./assets/icons/logo.png",
   "repository": {
     "type": "git",
@@ -118,7 +147,7 @@
         },
         "garden.waterAmount": {
           "type": "integer",
-          "default": 100,
+          "default": 30,
           "description": "Amount to water plants"
         },
         "garden.background": {

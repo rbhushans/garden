@@ -17,7 +17,8 @@ export const backgrounds: { [key: string]: Background } = {
         occupationLimit: 20
       }
     ],
-    source: "outside.png"
+    source: "outside.png",
+    backgroundColor: "#83E4FF"
   },
   backyard: {
     theme: "backyard",
@@ -33,7 +34,8 @@ export const backgrounds: { [key: string]: Background } = {
         occupationLimit: 20
       }
     ],
-    source: "backyard.png"
+    source: "backyard.png",
+    backgroundColor: "#BCD9FF"
   },
   balcony: {
     theme: "balcony",
@@ -79,6 +81,7 @@ export const backgrounds: { [key: string]: Background } = {
         occupationLimit: 5
       }
     ],
-    source: "balcony.png"
+    source: "balcony.png",
+    backgroundColor: "#E4EEF6"
   }
 };

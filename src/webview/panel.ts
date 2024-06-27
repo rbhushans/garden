@@ -57,23 +57,25 @@ const getWebView = (
     </head>
     <body>
 
+      <div id="parent">
         <div id="main-div">
           <img id="background-img" src="${backgroundImageUri}">
 
-          <div id="water-level-back">
-          </div>
+          <div id="water-level-back"></div>
 
-          <div id="water-level">
-          </div>
+          <div id="water-level"></div>
 
           <div id="plant-list">
             Loading... 
           </div>
-				</div>
+        </div>
 
         <div id="loading-div">
           <img src="${loadingUri}">
         </div>
+      </div>
+
+        
 
         <script nonce="${nonce}" src="${scriptUri}"></script>
     </body>

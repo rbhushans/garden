@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { PanelUtils } from "../utils/PanelUtils";
-import { Panel } from "./Panel";
+import { Panel } from "./panel";
 import { StateManager } from "../managers/StateManager";
 
 export class GardenViewProvider implements vscode.WebviewViewProvider {
@@ -34,13 +34,15 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       if (webviewView.visible) {
         this.updateWater(false);
         this.updatePlants(false);
+        this.updateBackground();
       }
     });
 
     // todo - need to see if way to avoid this hack
     setTimeout(() => {
       this.updatePlants(true);
-    }, 5000);
+      this.updateBackground();
+    }, 3000);
   }
 
   public updateWater(shouldShow: boolean) {
@@ -77,7 +79,7 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       // now update the UI
       this._view.webview.postMessage({
         type: "updateBackground",
-        value: uri
+        value: { uri: uri, backgroundColor: background.backgroundColor }
       });
     }
   }

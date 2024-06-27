@@ -19,7 +19,7 @@
         break;
       }
       case "updateBackground": {
-        updateBackground(message.value);
+        updateBackground(message.value.uri, message.value.backgroundColor);
         break;
       }
     }
@@ -82,13 +82,15 @@
 
   /**
    * @param {string} backgroundUri
+   * @param {string} backgroundColor
    */
-  function updateBackground(backgroundUri) {
+  function updateBackground(backgroundUri, backgroundColor) {
     // update image
     const img = document.getElementById("background-img");
     if (img) {
       // @ts-ignore
       img.src = backgroundUri;
+      document.body.style.backgroundColor = backgroundColor;
     }
   }
 })();

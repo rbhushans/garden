@@ -32,6 +32,10 @@ const getPlantArray = (context: vscode.ExtensionContext): Plant[] => {
   return context.globalState.get("plantArray") ?? [];
 };
 
+const getIsModalActive = (context: vscode.ExtensionContext): boolean => {
+  return context.globalState.get("isModalActive") ?? false;
+};
+
 const updatePlants = async (
   context: vscode.ExtensionContext,
   plants: string[]
@@ -160,6 +164,13 @@ const updateBackground = async (
   await context.globalState.update("background", background);
 };
 
+const updateIsModalActive = async (
+  context: vscode.ExtensionContext,
+  isModalActive: boolean
+) => {
+  await context.globalState.update("isModalActive", isModalActive);
+};
+
 const resetBackgroundState = async (context: vscode.ExtensionContext) => {
   const background = getBackground(context);
   const resetBackground: Background = {
@@ -180,8 +191,10 @@ export const StateManager = {
   getNotifyId,
   getBackground,
   getPlantArray,
+  getIsModalActive,
   updatePlants,
   updateWaterLevel,
   updateNotifyId,
-  updateBackground
+  updateBackground,
+  updateIsModalActive
 };

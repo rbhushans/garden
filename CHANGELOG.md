@@ -2,6 +2,11 @@
 
 All notable changes to the garden extension in VS Code will be documented in this file.
 
+## [1.2.0] - 06/26/2024
+
+- Made the views more immersive - no more awkward space
+- Modals will now not show up if there's an existing modal present
+
 ## [1.1.0] - 06/24/2024
 
 - New theme - balcony

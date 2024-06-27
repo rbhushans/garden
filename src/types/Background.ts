@@ -6,6 +6,7 @@ export interface Background {
   height: number;
   source: string;
   plantAreas: PlantArea[];
+  backgroundColor: string;
 }
 
 // define coords and dims as a %
