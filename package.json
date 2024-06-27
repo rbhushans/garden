@@ -15,8 +15,8 @@
     "vscode": "^1.77.0"
   },
   "galleryBanner": {
-    "color": "#C80000",
-    "theme": "dark"
+    "color": "#c1d0b5",
+    "theme": "light"
   },
   "badges": [
     {
