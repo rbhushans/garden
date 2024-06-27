@@ -1,6 +1,5 @@
 ### Open Bugs
 
-- [p0] Publish the extension
 - [p0] Spread out new plants between areas
 - [p1] Add unit tests
 - [p1] Fade loading and view
