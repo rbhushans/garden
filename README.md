@@ -4,10 +4,12 @@
 	<p>
 		<b>Add a fun garden to your coding experience!</b>
 	</p>
-	
-[![](https://img.shields.io/visual-studio-marketplace/v/RohanBhushan.vsc-garden?color=blue&logo=visual-studio)](https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden&ssr=false#version-history)
-[![](https://vsmarketplacebadges.dev/downloads/RohanBhushan.vsc-garden.svg)](https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden)
-[![](https://vsmarketplacebadges.dev/rating-star/RohanBhushan.vsc-garden.svg)](https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden&ssr=false#review-details)
+	<div align="center">
+		<a href="https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden&ssr=false#version-history"><img src="https://img.shields.io/visual-studio-marketplace/v/RohanBhushan.vsc-garden?color=blue&logo=visual-studio"></a>
+		<a href="https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden"><img src="https://vsmarketplacebadges.dev/downloads/RohanBhushan.vsc-garden.svg"></a>
+		<a href="https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden&ssr=false#review-details"><img src="https://vsmarketplacebadges.dev/rating-star/RohanBhushan.vsc-garden.svg"></a>
+	</div>
+	<br/>
 </div>
 
 This VS Code extension adds a fun garden to the UI, and reminds you to drink water!
