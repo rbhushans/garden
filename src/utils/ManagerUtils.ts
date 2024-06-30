@@ -1,3 +1,5 @@
+import { PlantArea } from "../types/Background";
+
 const safeArrayAccess = (ind: number, arr: any[]) => {
   if (ind < 0 || ind >= arr.length) {
     return null;
@@ -17,7 +19,17 @@ const getPlantsDiff = (arr1: string[], arr2: string[]) => {
   return arr1;
 };
 
+const isCoordInBounds = (xcoord: number, ycoord: number, area: PlantArea) => {
+  return (
+    xcoord > area.plantAreaTopLeftX &&
+    xcoord < area.plantAreaTopLeftX + area.plantAreaWidth &&
+    ycoord > area.plantAreaTopLeftY &&
+    ycoord < area.plantAreaTopLeftY + area.plantAreaHeight
+  );
+};
+
 export const ManagerUtils = {
   safeArrayAccess,
-  getPlantsDiff
+  getPlantsDiff,
+  isCoordInBounds
 };

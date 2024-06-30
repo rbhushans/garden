@@ -59,6 +59,9 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
               message.value.ycoord
             );
             return;
+          case "debug":
+            console.log("[DEBUG]", JSON.stringify(message));
+            return;
         }
       },
       undefined,

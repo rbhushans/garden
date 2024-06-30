@@ -73,6 +73,18 @@ const getWebView = (
         <div id="loading-div">
           <img src="${loadingUri}">
         </div>
+
+        <div id="plant-modal">
+          <div id="modal-content">
+            <button id="close-modal">&times;</button>
+            <div id="modal-list">
+              <button class="plant-option">pothos</button>
+              <button class="plant-option">monstera</button>
+              <button class="plant-option">ivy</button>
+              <button class="plant-option">fern</button>
+            </div>
+          </div>
+        </div>
       </div>
 
         

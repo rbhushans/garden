@@ -10,6 +10,8 @@ const addPlant = (
   ycoord: number
 ): void => {
   const currentPlants = SettingsManager.getPlants();
+  currentPlants.push(plant);
+  StateManager.addSinglePlant(context, plant, xcoord, ycoord);
   StateManager.updateIsProgramSettingsUpdate(context, true).then(() => {
     SettingsManager.updatePlants(currentPlants);
   });

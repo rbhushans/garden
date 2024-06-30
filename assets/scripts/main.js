@@ -5,6 +5,8 @@
 (function () {
   // @ts-ignore
   const vscode = acquireVsCodeApi();
+  var clickXCoord;
+  var clickYCoord;
 
   // Handle messages sent from the extension to the webview
   window.addEventListener("message", (event) => {
@@ -94,12 +96,25 @@
     if (img) {
       // @ts-ignore
       img.src = backgroundUri;
+      img.onmousedown = addPlantMouseDown;
+      img.onmouseup = addPlantMouseUp;
       document.body.style.backgroundColor = backgroundColor;
+    }
+    const closeButton = document.getElementById("close-modal");
+    if (closeButton) {
+      closeButton.onclick = closeModal;
+    }
+    const optionButtons = document.getElementsByClassName("plant-option");
+    for (let i = 0; i < optionButtons.length; i++) {
+      optionButtons[i].addEventListener("click", () => {
+        closeModal();
+        sendAddPlantMessage(optionButtons[i].textContent);
+      });
     }
   }
 
   var plantPressTimer;
-  // var backgroundPressTimer;
+  var backgroundPressTimer;
 
   /**
    *
@@ -112,12 +127,55 @@
         type: "removePlant",
         value: id
       });
-    }, 2000);
+    }, 1000);
     return false;
   }
 
   function removePlantMouseUp() {
     clearTimeout(plantPressTimer);
     return false;
+  }
+
+  function addPlantMouseDown(event) {
+    var rect = event.target.getBoundingClientRect();
+    var x = event.clientX - rect.left; //x position within the element.
+    var y = event.clientY - rect.top; //y position within the element.
+    const img = document.getElementById("background-img");
+    const maxHeight = img?.clientHeight ?? window.screen.height;
+    const maxWidth = img?.clientWidth ?? window.screen.width;
+    clickXCoord = (x / maxWidth) * 100 - 14;
+    clickYCoord = (y / maxHeight) * 100 - 25;
+    backgroundPressTimer = window.setTimeout(function () {
+      const modal = document.getElementById("plant-modal");
+
+      if (modal) {
+        modal.style.display = "block";
+      }
+    }, 1000);
+    return false;
+  }
+
+  function addPlantMouseUp() {
+    clearTimeout(backgroundPressTimer);
+    return false;
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("plant-modal");
+
+    if (modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  function sendAddPlantMessage(type) {
+    vscode.postMessage({
+      type: "addPlant",
+      value: {
+        type: type,
+        xcoord: clickXCoord,
+        ycoord: clickYCoord
+      }
+    });
   }
 })();

@@ -56,11 +56,53 @@ const removeSinglePlant = async (
   if (indOfPlant !== -1) {
     currentStatePlants.splice(indOfPlant, 1);
     const plant = currentStatePlantData.splice(indOfPlant, 1);
-    currentBackground.plantAreas[plant[0].plantAreaIndex].occupationCount--;
+    if (plant[0].plantAreaIndex !== -1) {
+      currentBackground.plantAreas[plant[0].plantAreaIndex].occupationCount--;
+    }
     await context.globalState.update("plants", currentStatePlants);
     await context.globalState.update("plantArray", currentStatePlantData);
     await updateBackground(context, currentBackground);
   }
+};
+
+const addSinglePlant = async (
+  context: vscode.ExtensionContext,
+  type: plantType,
+  xcoord: number,
+  ycoord: number
+) => {
+  const currentStatePlants = StateManager.getPlants(context);
+  const currentStatePlantData = StateManager.getPlantArray(context);
+  const currentBackground = SettingsManager.getBackground();
+  let selectedInd = -1;
+  let plantArea = null;
+  for (let i = 0; i < currentBackground.plantAreas.length; i++) {
+    const area = currentBackground.plantAreas[i];
+    if (ManagerUtils.isCoordInBounds(xcoord, ycoord, area)) {
+      selectedInd = i;
+      plantArea = area;
+      break;
+    }
+  }
+  const plant: Plant = {
+    type: type,
+    xcoord: xcoord,
+    ycoord: ycoord,
+    source: plantFiles[type].source,
+    location: plantFiles[type].location as plantLocation,
+    plantAreaIndex: selectedInd,
+    scale: plantArea?.scale ?? 1,
+    id: `${type}_${xcoord}_${ycoord}`
+  };
+  if (selectedInd !== -1) {
+    currentBackground.plantAreas[selectedInd].occupationCount--;
+  }
+  currentStatePlants.push(type);
+  currentStatePlantData.push(plant);
+
+  await context.globalState.update("plants", currentStatePlants);
+  await context.globalState.update("plantArray", currentStatePlantData);
+  await updateBackground(context, currentBackground);
 };
 
 const updatePlants = async (
@@ -111,7 +153,10 @@ const updatePlants = async (
         // remove the plant
         currentPlantArray.splice(j, 1);
         // update the count for the background
-        currentBackground.plantAreas[plantObj.plantAreaIndex].occupationCount--;
+        if (plantObj.plantAreaIndex !== -1) {
+          currentBackground.plantAreas[plantObj.plantAreaIndex]
+            .occupationCount--;
+        }
         break;
       }
     }
@@ -239,5 +284,6 @@ export const StateManager = {
   updateBackground,
   updateIsModalActive,
   updateIsProgramSettingsUpdate,
-  removeSinglePlant
+  removeSinglePlant,
+  addSinglePlant
 };
