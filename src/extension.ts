@@ -38,8 +38,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // command for refreshing plants
   let refreshCommand = vscode.commands.registerCommand("garden.refresh", () => {
-    Refresh.setRandomPlants(context);
-    vscode.window.showInformationMessage("The garden has been refreshed!");
+    Refresh.setRandomPlants(context).then(() => {
+      vscode.window.showInformationMessage("The garden has been refreshed!");
+    });
   });
 
   // command for opening settings UI
@@ -63,8 +64,14 @@ export function activate(context: vscode.ExtensionContext) {
     let backgroundAffected = event.affectsConfiguration("garden.background");
 
     if (plantsAffected) {
-      const currentPlants: string[] = SettingsManager.getPlants();
-      await StateManager.updatePlants(context, currentPlants);
+      const isProgramSettingsUpdate =
+        StateManager.getIsProgramSettingsUpdate(context);
+      if (!isProgramSettingsUpdate) {
+        const currentPlants: string[] = SettingsManager.getPlants();
+        await StateManager.updatePlants(context, currentPlants);
+      } else {
+        await StateManager.updateIsProgramSettingsUpdate(context, false);
+      }
       provider.updatePlants(true);
     }
 
@@ -99,7 +106,7 @@ export function activate(context: vscode.ExtensionContext) {
       );
       StateManager.updatePlants(context, []);
       provider.updateBackground();
-      Refresh.setRandomPlants(context);
+      await Refresh.setRandomPlants(context);
     }
   });
 

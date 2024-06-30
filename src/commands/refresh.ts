@@ -16,11 +16,11 @@ const randomPlants = (): string[] => {
   return Array.from(plants.values());
 };
 
-const setRandomPlants = (context: vscode.ExtensionContext) => {
+const setRandomPlants = async (context: vscode.ExtensionContext) => {
   const newPlants = randomPlants();
-  // clear plants
-  SettingsManager.updatePlants([]);
+  StateManager.updateIsProgramSettingsUpdate(context, true);
   // set new plants
+  await StateManager.updatePlants(context, newPlants);
   SettingsManager.updatePlants(newPlants);
 };
 

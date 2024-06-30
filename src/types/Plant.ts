@@ -10,6 +10,7 @@ export interface Plant {
   ycoord: number;
   plantAreaIndex: number;
   scale: number;
+  id: string;
 }
 
 export type plantType = keyof typeof plantFiles;

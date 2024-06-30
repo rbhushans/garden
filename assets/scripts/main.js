@@ -60,7 +60,8 @@
     // const debug = document.getElementById("debugger");
     // if (debug) {
     //   debug.textContent =
-    //     debug.textContent?.concat("\n START ", plants.toString()) ?? " END";
+    //     debug.textContent?.concat("\n START ", JSON.stringify(plants)) ??
+    //     " END";
     // }
 
     if (div) {
@@ -70,6 +71,9 @@
         img.src = plant.source;
         img.style.left = plant.xcoord + "%";
         img.style.top = plant.ycoord + "%";
+        img.id = plant.id;
+        img.onmousedown = () => removePlantMouseDown(plant.id);
+        img.onmouseup = removePlantMouseUp;
         img.classList.add("plant-img");
         img.title = plant.source;
         // img.style.height = plant.scale * 24 + "vw";
@@ -92,5 +96,28 @@
       img.src = backgroundUri;
       document.body.style.backgroundColor = backgroundColor;
     }
+  }
+
+  var plantPressTimer;
+  // var backgroundPressTimer;
+
+  /**
+   *
+   * @param {string} id
+   * @returns
+   */
+  function removePlantMouseDown(id) {
+    plantPressTimer = window.setTimeout(function () {
+      vscode.postMessage({
+        type: "removePlant",
+        value: id
+      });
+    }, 2000);
+    return false;
+  }
+
+  function removePlantMouseUp() {
+    clearTimeout(plantPressTimer);
+    return false;
   }
 })();

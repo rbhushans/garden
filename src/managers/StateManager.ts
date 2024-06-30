@@ -5,6 +5,8 @@ import { plantFiles, plantStringMap } from "../constants/Plants";
 import { MathUtils } from "../utils/MathUtils";
 import { Background } from "../types/Background";
 import { Plant, plantLocation, plantType } from "../types/Plant";
+import { SettingsManager } from "./SettingsManager";
+import { ManagerUtils } from "../utils/ManagerUtils";
 
 const getPlants = (context: vscode.ExtensionContext): string[] => {
   return context.globalState.get("plants") ?? [];
@@ -34,6 +36,31 @@ const getPlantArray = (context: vscode.ExtensionContext): Plant[] => {
 
 const getIsModalActive = (context: vscode.ExtensionContext): boolean => {
   return context.globalState.get("isModalActive") ?? false;
+};
+
+const getIsProgramSettingsUpdate = (
+  context: vscode.ExtensionContext
+): boolean => {
+  return context.globalState.get("isProgramSettingsUpdate") ?? false;
+};
+
+const removeSinglePlant = async (
+  context: vscode.ExtensionContext,
+  plantId: string
+) => {
+  const currentStatePlants = StateManager.getPlants(context);
+  const currentStatePlantData = StateManager.getPlantArray(context);
+  const currentBackground = getBackground(context);
+
+  const indOfPlant = currentStatePlantData.findIndex((v) => v.id === plantId);
+  if (indOfPlant !== -1) {
+    currentStatePlants.splice(indOfPlant, 1);
+    const plant = currentStatePlantData.splice(indOfPlant, 1);
+    currentBackground.plantAreas[plant[0].plantAreaIndex].occupationCount--;
+    await context.globalState.update("plants", currentStatePlants);
+    await context.globalState.update("plantArray", currentStatePlantData);
+    await updateBackground(context, currentBackground);
+  }
 };
 
 const updatePlants = async (
@@ -126,15 +153,18 @@ const updatePlants = async (
 
     const currentCoordinates = plantCoordinates.pop() ?? [0, 0];
     const plantMapped: plantType = plantStringMap.get(plant) ?? "fern";
+    const xcoord = plantArea.plantAreaTopLeftX + currentCoordinates[0];
+    const ycoord = plantArea.plantAreaTopLeftY + currentCoordinates[1];
 
     currentPlantArray.push({
       type: plantMapped,
-      xcoord: plantArea.plantAreaTopLeftX + currentCoordinates[0],
-      ycoord: plantArea.plantAreaTopLeftY + currentCoordinates[1],
+      xcoord: xcoord,
+      ycoord: ycoord,
       source: plantFiles[plantMapped].source,
       location: plantFiles[plantMapped].location as plantLocation,
       plantAreaIndex: selectedInd,
-      scale: plantArea.scale ?? 1
+      scale: plantArea.scale ?? 1,
+      id: `${plantMapped}_${xcoord}_${ycoord}`
     });
     currentBackground.plantAreas[selectedInd].occupationCount++;
   }
@@ -171,6 +201,16 @@ const updateIsModalActive = async (
   await context.globalState.update("isModalActive", isModalActive);
 };
 
+const updateIsProgramSettingsUpdate = async (
+  context: vscode.ExtensionContext,
+  isProgramSettingsUpdate: boolean
+) => {
+  await context.globalState.update(
+    "isProgramSettingsUpdate",
+    isProgramSettingsUpdate
+  );
+};
+
 const resetBackgroundState = async (context: vscode.ExtensionContext) => {
   const background = getBackground(context);
   const resetBackground: Background = {
@@ -192,9 +232,12 @@ export const StateManager = {
   getBackground,
   getPlantArray,
   getIsModalActive,
+  getIsProgramSettingsUpdate,
   updatePlants,
   updateWaterLevel,
   updateNotifyId,
   updateBackground,
-  updateIsModalActive
+  updateIsModalActive,
+  updateIsProgramSettingsUpdate,
+  removeSinglePlant
 };

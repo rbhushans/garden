@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { PanelUtils } from "../utils/PanelUtils";
 import { Panel } from "./panel";
 import { StateManager } from "../managers/StateManager";
+import { Webview } from "../commands/Webview";
 
 export class GardenViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "garden.gardenView";
@@ -43,6 +44,26 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       this.updatePlants(true);
       this.updateBackground();
     }, 3000);
+
+    webviewView.webview.onDidReceiveMessage(
+      (message) => {
+        switch (message.type) {
+          case "removePlant":
+            Webview.removePlant(this.extensionContext, message.value);
+            return;
+          case "addPlant":
+            Webview.addPlant(
+              this.extensionContext,
+              message.value.type,
+              message.value.xcoord,
+              message.value.ycoord
+            );
+            return;
+        }
+      },
+      undefined,
+      this.extensionContext.subscriptions
+    );
   }
 
   public updateWater(shouldShow: boolean) {
@@ -109,7 +130,8 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
             )
             .toString(),
           location: plant.location,
-          scale: plant.scale
+          scale: plant.scale,
+          id: plant.id
         });
       }
 
