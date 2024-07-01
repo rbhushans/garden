@@ -71,17 +71,25 @@
       for (const plant of plants) {
         const img = document.createElement("img");
         img.src = plant.source;
-        img.style.left = plant.xcoord + "%";
-        img.style.top = plant.ycoord + "%";
-        img.id = plant.id;
-        img.onmousedown = () => removePlantMouseDown(plant.id);
-        img.onmouseup = removePlantMouseUp;
         img.classList.add("plant-img");
         img.title = plant.source;
         // img.style.height = plant.scale * 24 + "vw";
         // img.style.width = plant.scale * 24 + "vw";
 
-        div.appendChild(img);
+        const container = document.createElement("div");
+        container.classList.add("plant-img-div-outer");
+        container.style.left = plant.xcoord + "%";
+        container.style.top = plant.ycoord + "%";
+
+        const clickableArea = document.createElement("div");
+        clickableArea.classList.add("plant-img-button");
+        clickableArea.onmousedown = () => removePlantMouseDown(plant.id);
+        clickableArea.onmouseup = removePlantMouseUp;
+        clickableArea.id = plant.id;
+
+        container.appendChild(clickableArea);
+        container.appendChild(img);
+        div.appendChild(container);
       }
     }
   }
@@ -106,10 +114,20 @@
     }
     const optionButtons = document.getElementsByClassName("plant-option");
     for (let i = 0; i < optionButtons.length; i++) {
+      if (optionButtons[i].getAttribute("hasClickHandler") === "true") {
+        continue;
+      }
       optionButtons[i].addEventListener("click", () => {
+        vscode.postMessage({
+          type: "debug",
+          value: {
+            clicked: optionButtons[i].textContent?.trim()
+          }
+        });
         closeModal();
         sendAddPlantMessage(optionButtons[i].textContent?.trim());
       });
+      optionButtons[i].setAttribute("hasClickHandler", "true");
     }
   }
 
@@ -145,18 +163,35 @@
     const maxWidth = img?.clientWidth ?? window.screen.width;
     clickXCoord = (x / maxWidth) * 100 - 14;
     clickYCoord = (y / maxHeight) * 100 - 25;
+
+    const clicker = document.createElement("div");
+    clicker.id = "clicker";
+    clicker.style.left = (x / maxWidth) * 100 - 2 + "%";
+    clicker.style.top = (y / maxHeight) * 100 - 2 + "%";
+
+    const clickerRing = document.createElement("div");
+    clickerRing.id = "clicker-ring";
+    clicker.appendChild(clickerRing);
+
+    const mainDiv = document.getElementById("main-div");
+    if (mainDiv) {
+      mainDiv.appendChild(clicker);
+    }
+
     backgroundPressTimer = window.setTimeout(function () {
       const modal = document.getElementById("plant-modal");
 
       if (modal) {
         modal.style.display = "block";
       }
+      removeClicker();
     }, 1000);
     return false;
   }
 
   function addPlantMouseUp() {
     clearTimeout(backgroundPressTimer);
+    removeClicker();
     return false;
   }
 
@@ -165,6 +200,13 @@
 
     if (modal) {
       modal.style.display = "none";
+    }
+  }
+
+  function removeClicker() {
+    const clicker = document.getElementById("clicker");
+    if (clicker) {
+      clicker.parentNode?.removeChild(clicker);
     }
   }
 

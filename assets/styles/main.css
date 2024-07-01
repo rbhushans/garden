@@ -68,7 +68,34 @@ body {
   width: 24vw;
 }
 
-.plant-img:active {
+.plant-img-div-outer {
+  position: absolute;
+  padding: 0.5rem;
+  margin: 4px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  height: 24vw;
+  width: 24vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.plant-img-button {
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  height: 10vw;
+  width: 10vw;
+  margin: 0 auto;
+  z-index: 3;
+  pointer-events: all;
+}
+
+.plant-img-button:active + .plant-img {
   animation-iteration-count: infinite;
   animation: shake 1s;
 }
@@ -119,6 +146,47 @@ body {
 #debugger {
   background-color: blue;
   position: absolute;
+}
+
+#clicker {
+  background-color: white;
+  box-shadow: 0px 0px 2px 2px rgba(255, 255, 255, 0.373);
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#clicker-ring {
+  height: 8px;
+  width: 8px;
+  border: 2px solid rgb(195, 195, 195);
+  border-radius: 50%;
+  margin: 0 auto;
+  background-color: transparent;
+  position: relative;
+  pointer-events: none;
+  animation: pulsate 0.7s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2, 2);
+    opacity: 0;
+  }
 }
 
 /* Modal Styles */

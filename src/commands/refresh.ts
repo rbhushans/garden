@@ -18,8 +18,13 @@ const randomPlants = (): string[] => {
 
 const setRandomPlants = async (context: vscode.ExtensionContext) => {
   const newPlants = randomPlants();
-  StateManager.updateIsProgramSettingsUpdate(context, true);
+  // clear plants
+  await StateManager.updateIsProgramSettingsUpdate(context, true);
+  await StateManager.updatePlants(context, []);
+  SettingsManager.updatePlants([]);
+
   // set new plants
+  await StateManager.updateIsProgramSettingsUpdate(context, true);
   await StateManager.updatePlants(context, newPlants);
   SettingsManager.updatePlants(newPlants);
 };
