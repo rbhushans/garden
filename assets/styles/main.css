@@ -137,11 +137,11 @@ body {
 
 #modal-content {
   position: relative;
-  background-color: #fefefe;
+  background-color: #344e41;
   margin: auto;
   padding: 0;
-  border: 1px solid #888;
   width: 80%;
+  border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation-name: animatetop;
   animation-duration: 0.4s;
@@ -159,10 +159,11 @@ body {
 }
 
 #close-modal {
-  color: #aaa;
-  float: right;
+  color: black;
   font-size: 28px;
   font-weight: bold;
+  background-color: transparent;
+  border: none;
 }
 
 #close:hover,
@@ -170,16 +171,43 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+  border: 1px solid white;
 }
 
 #modal-list {
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
 .plant-option {
-  color: #aaa;
+  color: black;
   float: left;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  background-color: #a3b18a;
+  align-items: center;
+}
+
+.plant-option:hover,
+.plant-option:focus {
+  border: 1px solid white;
+  background-color: #b3be9f;
+  cursor: pointer;
+}
+
+.plant-option-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+#modal-header {
+  display: flex;
+  flex-direction: row;
+  font-size: 28px;
+  justify-content: space-between;
 }

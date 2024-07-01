@@ -65,7 +65,7 @@
     "commands": [
       {
         "command": "garden.water",
-        "title": "Garden: Water",
+        "title": "Garden: Water Plants",
         "icon": {
           "light": "./assets/icons/light/watering-can-light.svg",
           "dark": "./assets/icons/dark/watering-can-dark.svg"
@@ -73,7 +73,7 @@
       },
       {
         "command": "garden.refresh",
-        "title": "Garden: Refresh",
+        "title": "Garden: Refresh Plants",
         "icon": {
           "light": "./assets/icons/light/refresh.svg",
           "dark": "./assets/icons/dark/refresh.svg"
@@ -81,7 +81,7 @@
       },
       {
         "command": "garden.edit",
-        "title": "Garden: Edit",
+        "title": "Garden: Edit Settings",
         "icon": {
           "light": "./assets/icons/light/edit.svg",
           "dark": "./assets/icons/dark/edit.svg"

@@ -5,4 +5,5 @@
 - [p1] Fade loading and view
 - [p1] Add levels to plants (based on water level)
 - [p1] Add valid/invalid plants for themes
-- [p1] Add modal styles + images of plants with options
+- [p1] Improve the initial load sequence
+- [p1] Update to settings icon

@@ -108,7 +108,7 @@
     for (let i = 0; i < optionButtons.length; i++) {
       optionButtons[i].addEventListener("click", () => {
         closeModal();
-        sendAddPlantMessage(optionButtons[i].textContent);
+        sendAddPlantMessage(optionButtons[i].textContent?.trim());
       });
     }
   }

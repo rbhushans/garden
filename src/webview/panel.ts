@@ -1,6 +1,7 @@
 // This file houses the HTML for the garden webview
 import * as vscode from "vscode";
 import { SettingsManager } from "../managers/SettingsManager";
+import { PanelUtils } from "../utils/PanelUtils";
 
 const getWebView = (
   nonce: string,
@@ -32,6 +33,30 @@ const getWebView = (
       "plant_loading_small.gif"
     )
   );
+  const pothosUri = PanelUtils.getPlantUri(
+    "pothos",
+    background,
+    extensionUri,
+    webview
+  );
+  const fernUri = PanelUtils.getPlantUri(
+    "fern",
+    background,
+    extensionUri,
+    webview
+  );
+  const monsteraUri = PanelUtils.getPlantUri(
+    "monstera",
+    background,
+    extensionUri,
+    webview
+  );
+  const ivyUri = PanelUtils.getPlantUri(
+    "ivy",
+    background,
+    extensionUri,
+    webview
+  );
 
   return `<!DOCTYPE html>
     <html lang="en">
@@ -44,19 +69,10 @@ const getWebView = (
         -->
 				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          body {
-            background-image: url('${backgroundImageUri}');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-          }
-        </style>
 		    <link href="${styleMainUri}" rel="stylesheet">
         <title>Garden</title>
     </head>
     <body>
-
       <div id="parent">
         <div id="main-div">
           <img id="background-img" src="${backgroundImageUri}">
@@ -66,7 +82,6 @@ const getWebView = (
           <div id="water-level"></div>
 
           <div id="plant-list">
-            Loading... 
           </div>
         </div>
 
@@ -74,20 +89,34 @@ const getWebView = (
           <img src="${loadingUri}">
         </div>
 
-        <div id="plant-modal">
+        <div id="plant-modal" style="display:none;">
           <div id="modal-content">
-            <button id="close-modal">&times;</button>
+            
             <div id="modal-list">
-              <button class="plant-option">pothos</button>
-              <button class="plant-option">monstera</button>
-              <button class="plant-option">ivy</button>
-              <button class="plant-option">fern</button>
+              <div id="modal-header">
+                Add a plant:
+                <button id="close-modal">&times;</button>
+              </div>
+              <button class="plant-option">
+                <img class="plant-option-img" src="${pothosUri}">
+                pothos
+              </button>
+              <button class="plant-option">
+                <img class="plant-option-img" src="${monsteraUri}">
+                monstera
+              </button>
+              <button class="plant-option">
+                <img class="plant-option-img" src="${ivyUri}">
+                ivy
+              </button>
+              <button class="plant-option">
+                <img class="plant-option-img" src="${fernUri}">
+                fern
+              </button>
             </div>
           </div>
         </div>
       </div>
-
-        
 
         <script nonce="${nonce}" src="${scriptUri}"></script>
     </body>
