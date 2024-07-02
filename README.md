@@ -64,7 +64,7 @@ See CHANGELOG.md
 
 ## Contributing
 
-Constributions to the codebase are always welcome! See bugs.md for any open issues or improvements I've identified. If you would like to add a new theme to the extension, feel free to submit a PR.
+Contributions to the codebase are always welcome! See bugs.md for any open issues or improvements I've identified. If you would like to add a new theme to the extension, feel free to submit a PR.
 
 ## Artists
 
