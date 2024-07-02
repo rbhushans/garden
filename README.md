@@ -14,20 +14,26 @@
 
 This VS Code extension adds a fun garden to the UI, and reminds you to drink water!
 
-![beta demo](https://github.com/rbhushans/garden/blob/main/assets/documentation/garden_v1.0.1_demo.gif?raw=true)
+![beta demo](https://github.com/rbhushans/garden/blob/main/assets/documentation/garden_v2.0.0_demo.gif?raw=true)
 
 ## Features
+
+Customize your garden!
+
+- Long press on any empty space within the garden to bring up a modal to add a new plant
+- Long press on any plant to remove it
 
 Commands:
 
 - Water - waters the plants
 - Refresh - completely refreshes the plants
+- Edit - opens the garden settings (see below for different settings)
 
 Can also drag to the VSCode Left Panel or within a subpanel (e.g. the file explorer)
 
 ## Installation
 
-Install the latest published version from the VSCode Marketplace.
+Install the latest published version from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=RohanBhushan.vsc-garden).
 
 Alternatively, see the latest releases on Github, and download the .vsix file. To install the file, go to the Extensions tab in VSCode, click the three dots at the top, and select "Install from VSIX", choose the downloaded file.
 
@@ -41,7 +47,7 @@ If the Garden window can't be found, click "CMD + SHIFT + P", search garden, and
 
 This extension contributes the following settings:
 
-- `garden.plants`: Add or remove plants from the list of plants available. If there are duplicate plants, and one of them is removed, there's currently no reliable way to know which one will be removed.
+- `garden.plants`: Add or remove plants from the list of plants available. If there are duplicate plants, and one of them is removed, there's currently no reliable way to know which one will be removed if using the settings UI (the order is based on addition order) - to have more fine tuned control, just long press on the plant you want to remove.
 - `garden.shouldNotify`: When this is enabled, the Garden extension will notify the user when it is time to water their plants (and drink water themselves!) This uses the water notification time value to determine the cadence of notifications.
 - `garden.isModal`: When this is enabled, the Garden extension will use a modal to notify the user. This is a much more disruptive experience, but can be more effective when the goal is to grab attention.
 - `garden.waterNotificationTime`: This is the time between notifications to water the plants, in minutes. The default value is 30 minutes. If shouldNotify is disabled, this value is ignored.
@@ -55,6 +61,10 @@ No major issues known at this time. For current bugs/features to be implemented,
 ## Release Notes
 
 See CHANGELOG.md
+
+## Contributing
+
+Constributions to the codebase are always welcome! See bugs.md for any open issues or improvements I've identified. If you would like to add a new theme to the extension, feel free to submit a PR.
 
 ## Artists
 
