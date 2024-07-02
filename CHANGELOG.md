@@ -2,6 +2,12 @@
 
 All notable changes to the garden extension in VS Code will be documented in this file.
 
+## [2.0.0] - 07/01/2024
+
+- Added the ability to long-press on plants to remove them, with a shake animation
+- Added the ability to add plants in specific locations by long pressing (no more hoping the plants end up in a good arrangement!)
+- Updated the edit icon to a settings icon
+
 ## [1.2.0] - 06/26/2024
 
 - Made the views more immersive - no more awkward space

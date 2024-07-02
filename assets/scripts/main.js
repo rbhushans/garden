@@ -113,17 +113,20 @@
       closeButton.onclick = closeModal;
     }
     const optionButtons = document.getElementsByClassName("plant-option");
+    const baseUriList = backgroundUri.split("/");
+    baseUriList.pop();
+    const baseUri = baseUriList.join("/");
     for (let i = 0; i < optionButtons.length; i++) {
+      const type = optionButtons[i].textContent?.trim();
+      const optionImg = optionButtons[i].querySelector("img");
+      if (optionImg) {
+        optionImg.src = `${baseUri}/${type}.png`;
+      }
+
       if (optionButtons[i].getAttribute("hasClickHandler") === "true") {
         continue;
       }
       optionButtons[i].addEventListener("click", () => {
-        vscode.postMessage({
-          type: "debug",
-          value: {
-            clicked: optionButtons[i].textContent?.trim()
-          }
-        });
         closeModal();
         sendAddPlantMessage(optionButtons[i].textContent?.trim());
       });
@@ -182,7 +185,12 @@
       const modal = document.getElementById("plant-modal");
 
       if (modal) {
-        modal.style.display = "block";
+        modal.style.display = "flex";
+
+        if (modal.getAttribute("hasClickHandler") !== "true") {
+          modal.onclick = closeModal;
+          modal.setAttribute("hasClickHandler", "true");
+        }
       }
       removeClicker();
     }, 1000);
