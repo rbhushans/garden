@@ -21,7 +21,11 @@
         break;
       }
       case "updateBackground": {
-        updateBackground(message.value.uri, message.value.backgroundColor);
+        updateBackground(
+          message.value.uri,
+          message.value.backgroundColor,
+          message.value.shouldClearPlants
+        );
         break;
       }
     }
@@ -98,7 +102,11 @@
    * @param {string} backgroundUri
    * @param {string} backgroundColor
    */
-  function updateBackground(backgroundUri, backgroundColor) {
+  function updateBackground(backgroundUri, backgroundColor, shouldClearPlants) {
+    const div = document.getElementById("plant-list");
+    if (shouldClearPlants && div) {
+      div.textContent = "";
+    }
     // update image
     const img = document.getElementById("background-img");
     if (img) {

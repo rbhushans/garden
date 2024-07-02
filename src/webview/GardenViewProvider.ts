@@ -35,14 +35,14 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       if (webviewView.visible) {
         this.updateWater(false);
         this.updatePlants(false);
-        this.updateBackground();
+        this.updateBackground(false);
       }
     });
 
     // todo - need to see if way to avoid this hack
     setTimeout(() => {
       this.updatePlants(true);
-      this.updateBackground();
+      this.updateBackground(false);
     }, 3000);
 
     webviewView.webview.onDidReceiveMessage(
@@ -85,7 +85,7 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  public updateBackground() {
+  public updateBackground(shouldClearPlants = true) {
     if (this._view) {
       const background = StateManager.getBackground(this.extensionContext);
       const uri = this._view.webview
@@ -103,7 +103,11 @@ export class GardenViewProvider implements vscode.WebviewViewProvider {
       // now update the UI
       this._view.webview.postMessage({
         type: "updateBackground",
-        value: { uri: uri, backgroundColor: background.backgroundColor }
+        value: {
+          uri: uri,
+          backgroundColor: background.backgroundColor,
+          shouldClearPlants: shouldClearPlants
+        }
       });
     }
   }
