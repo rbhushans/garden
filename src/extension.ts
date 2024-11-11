@@ -41,6 +41,12 @@ export function activate(context: vscode.ExtensionContext) {
     Refresh.setRandomPlants(context).then(() => {
       vscode.window.showInformationMessage("The garden has been refreshed!");
     });
+    Refresh.resetNotifications(provider, context).then((val) => {
+      if (timerIds.notifyId) {
+        clearInterval(timerIds.notifyId);
+      }
+      timerIds.notifyId = val;
+    });
   });
 
   // command for opening settings UI
@@ -62,6 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
       "garden.waterNotificationTime"
     );
     let backgroundAffected = event.affectsConfiguration("garden.background");
+    const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
 
     if (plantsAffected) {
       const isProgramSettingsUpdate =
@@ -78,15 +85,15 @@ export function activate(context: vscode.ExtensionContext) {
     if (shouldNotifyAffected) {
       if (timerIds.notifyId) {
         clearInterval(timerIds.notifyId);
+        timerIds.notifyId = undefined;
       }
 
-      const currentShouldNotify: boolean = SettingsManager.getShouldNotify();
       if (currentShouldNotify) {
         timerIds.notifyId = Notify.sendWaterNotification(provider, context);
       }
     }
 
-    if (notificationTimeAffected) {
+    if (notificationTimeAffected && currentShouldNotify) {
       if (timerIds.notifyId) {
         clearInterval(timerIds.notifyId);
       }

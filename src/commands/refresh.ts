@@ -4,6 +4,8 @@ import { plantTypes } from "../constants/Plants";
 import { StateManager } from "../managers/StateManager";
 import { MathUtils } from "../utils/MathUtils";
 import { SettingsManager } from "../managers/SettingsManager";
+import { Notify } from "./Notify";
+import { GardenViewProvider } from "../webview/GardenViewProvider";
 
 const randomPlants = (): string[] => {
   const numPlants = MathUtils.randomInt(plantTypes.length) + 1;
@@ -29,6 +31,21 @@ const setRandomPlants = async (context: vscode.ExtensionContext) => {
   SettingsManager.updatePlants(newPlants);
 };
 
+const resetNotifications = async (
+  provider: GardenViewProvider,
+  context: vscode.ExtensionContext
+): Promise<NodeJS.Timer | undefined> => {
+  // reset modal active value
+  await StateManager.updateIsModalActive(context, false);
+  const isNotificationsEnabled = SettingsManager.getShouldNotify();
+  // create a new water notification
+  if (isNotificationsEnabled) {
+    return Notify.sendWaterNotification(provider, context);
+  }
+  return undefined;
+};
+
 export const Refresh = {
-  setRandomPlants
+  setRandomPlants,
+  resetNotifications
 };
