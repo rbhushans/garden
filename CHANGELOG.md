@@ -2,6 +2,11 @@
 
 All notable changes to the garden extension in VS Code will be documented in this file.
 
+## [2.0.2] - 11/10/2024
+
+- Added functionality to reset timers when refreshing the garden (use this if notifications for some reason stop working)
+- Fixed some notification related logic
+
 ## [2.0.0] - 07/01/2024
 
 - Added the ability to long-press on plants to remove them, with a shake animation

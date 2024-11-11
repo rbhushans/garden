@@ -15,7 +15,7 @@ const sendNotification = async (
   const isModalCurrentlyActive = StateManager.getIsModalActive(context);
   const isModal = SettingsManager.getIsModal();
 
-  if (isModalCurrentlyActive) {
+  if (isModalCurrentlyActive && isModal) {
     return new Promise(
       (resolve: (value: string | undefined) => void, _reject) =>
         resolve(ACTIVE_MODAL)
